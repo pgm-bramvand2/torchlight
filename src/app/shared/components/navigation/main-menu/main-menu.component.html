@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title slot="start">Torchlight</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Torchlight
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle>
+        <ion-item lines="none" routerLink="/actions">
+          <ion-icon name="business" slot="start"></ion-icon>
+          
+          <ion-label>Actions</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      
+      <ion-menu-toggle>
+        <ion-item lines="none" routerLink="/actions">
+          <ion-icon name="business" slot="start"></ion-icon>
+
+          <ion-label>Actions</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
