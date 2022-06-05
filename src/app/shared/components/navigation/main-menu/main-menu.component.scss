@@ -1,0 +1,13 @@
+ion-header {
+    ion-toolbar {
+        --background: red;
+
+        ion-title {
+            text-transform: uppercase;
+        }
+    }
+
+    &::after {
+        background-image: none;
+    }
+}

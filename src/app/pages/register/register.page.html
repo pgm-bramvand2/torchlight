@@ -1,9 +1,62 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content fullscreen="true">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)"></form>
+  <ion-grid>
+    <ion-row class="ion-align-items-centerr">
+      <ion-col
+        size="10"
+      >
+      <ion-title>Register</ion-title>
+        <ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Email</ion-label>
+              
+              <ion-input
+                type="email"
+                ngModel
+                name="email"
+                placeholder="email"
+                required
+                email
+              ></ion-input>
+            </ion-item>
 
-<ion-content>
+            <ion-item>
+              <ion-label position="stacked">Password</ion-label>
+              
+              <ion-input
+                type="password"
+                ngModel
+                name="password"
+                placeholder="password"
+                required
+              ></ion-input>
+            </ion-item>
 
+            <ion-item>
+              <ion-label position="stacked">Repeat password</ion-label>
+              
+              <ion-input
+                type="password"
+                ngModel
+                name="repeat-password"
+                placeholder="password"
+                required
+              ></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-button
+                type="submit"
+                color="primary"
+                expand="full"
+                >
+                Register
+              </ion-button>      
+            </ion-item>
+          </ion-list>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CharacterPageRoutingModule } from './character-routing.module';
 
 import { CharacterPage } from './character.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CharacterPageRoutingModule
+    CharacterPageRoutingModule,
+    SharedModule
   ],
   declarations: [CharacterPage]
 })
