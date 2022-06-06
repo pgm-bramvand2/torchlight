@@ -1,0 +1,42 @@
+ion-grid {
+    padding: 0;
+    ion-row {
+        padding: 0;
+        ion-col {
+            height: 4rem;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+
+            ion-thumbnail {
+                height: 100%;
+                width: 100%;
+            }
+
+            ion-button {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                --border-radius: none;
+                --box-shadow: none;
+                --background: #00A3D5;
+
+                ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+.separator {
+    margin: .25rem 0;
+    height: .1rem;
+    width: 80%;
+    background-color: #FBFBFB;
+}

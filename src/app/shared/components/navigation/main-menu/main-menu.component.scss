@@ -1,9 +1,19 @@
 ion-header {
     ion-toolbar {
-        --background: red;
+        --background: #050E10;
 
         ion-title {
             text-transform: uppercase;
+            font-size: 1rem;
+            color: #FBFBFB;
+
+            .accent {
+                color: #00A3D5;
+            }
+        }
+
+        ion-menu-button {
+            --color: #FBFBFB;
         }
     }
 
