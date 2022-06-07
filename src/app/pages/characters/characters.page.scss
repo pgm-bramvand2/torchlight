@@ -1,0 +1,27 @@
+ion-grid {
+    padding-top: 2rem;
+
+    ion-item {
+        margin-bottom: 1rem;
+
+        ion-label {
+            margin-left: 1rem;
+            display: flex!important;
+            flex-direction: column;
+        }
+    
+        ion-thumbnail {
+            margin: 0;
+        }
+    }
+    
+    .add-thumbnail {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: black;
+        color: white;
+        font-size: 2rem;
+    }
+
+}
