@@ -1,3 +1,39 @@
 <ion-content id="main-content">
 
+<app-main-menu></app-main-menu>
+
+<app-character-bar></app-character-bar>
+    <ion-grid>
+        <ion-row>
+            <ion-col >
+                <ion-title> character </ion-title>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-segment value="friends" (ionChange)="onChange($event)">
+                    <ion-segment-button value="friends">
+                      <ion-label>Abilities</ion-label>
+                    </ion-segment-button>
+                    
+                    <ion-segment-button value="enemies">
+                      <ion-label>Skills</ion-label>
+                    </ion-segment-button>
+
+                    <ion-segment-button value="enemies">
+                      <ion-label>Proficiencies</ion-label>
+                    </ion-segment-button>
+                  </ion-segment>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+               
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <app-tab-bar></app-tab-bar>
 </ion-content>

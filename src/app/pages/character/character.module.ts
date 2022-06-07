@@ -15,7 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     CharacterPageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [CharacterPage]
 })

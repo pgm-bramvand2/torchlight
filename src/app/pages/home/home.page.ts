@@ -13,4 +13,9 @@ export class HomePage {
   async openMenu() {
     await this.menuCtrl.open();
   }
+
+  onChange(event) {
+    console.log(event);
+
+  }
 }

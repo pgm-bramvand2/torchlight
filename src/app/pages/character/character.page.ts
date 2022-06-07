@@ -6,10 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./character.page.scss'],
 })
 export class CharacterPage implements OnInit {
+  dataSource = [
+    {
+      username: 'freddy',
+      age: 21,
+      title: 'bossman'
+    }
+  ];
 
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
+  }
+
+  onChange(value) {
+    console.log(value);
   }
 
 }
