@@ -1,5 +1,11 @@
-  <span class="passive-stat__title">{{ title }}</span>
-  
-  <div class="passive-stat__score">
-    <span>{{ score }}</span>
-  </div>
+<span
+  *ngIf="title" 
+  class="passive-stat__title"
+>
+  {{ title }}
+</span>
+
+
+<div class="passive-stat__score">
+  <span>{{ score }}</span>
+</div>

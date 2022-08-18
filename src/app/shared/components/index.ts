@@ -4,6 +4,7 @@ import { DefaultLayoutComponent } from './layout/default/default.component';
 import { CharacterBarComponent } from './character-bar/character-bar.component';
 import { PassiveStatComponent } from './passive-stat/passive-stat.component';
 import { InspirationButtonComponent } from './inspiration-button/inspiration-button.component';
+import { commonComponents } from './common';
 
 
 export const sharedComponents = [
@@ -12,5 +13,6 @@ export const sharedComponents = [
     DefaultLayoutComponent,
     CharacterBarComponent,
     PassiveStatComponent,
-    InspirationButtonComponent
+    InspirationButtonComponent,
+    ...commonComponents
 ];

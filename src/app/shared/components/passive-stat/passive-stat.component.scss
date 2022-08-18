@@ -11,11 +11,15 @@
     }
 
     .passive-stat__score {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 2rem;
         height: 2rem;
-        font-size: .75rem;
+        font-size: .65rem;
         padding: .5rem;
         border: 1px solid #00A3D5;
         border-radius: 5px;
+        background-color: #FBFBFB;
     }
 }

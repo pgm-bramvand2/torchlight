@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PassiveStatComponent implements OnInit {
   @Input() title: string;
-  @Input() score: string;
+  @Input() score: string | number;
 
   constructor() { }
 
