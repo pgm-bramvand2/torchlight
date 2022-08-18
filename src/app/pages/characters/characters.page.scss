@@ -8,6 +8,10 @@ ion-grid {
             margin-left: 1rem;
             display: flex!important;
             flex-direction: column;
+
+            strong {
+                font-size: .8rem;
+            }
         }
     
         ion-thumbnail {
@@ -21,7 +25,6 @@ ion-grid {
         justify-content: center;
         background: black;
         color: white;
-        font-size: 2rem;
-    }
+        font-size: 2rem;    }
 
 }

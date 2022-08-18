@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">
+      <span class="accent">Torch</span><span>light</span>
+    </ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<app-character-bar></app-character-bar>
+
+<ion-content id="main-content">
+  <ion-grid>
+      <ion-row>
+          <app-title
+            title="character"
+          ></app-title>
+      </ion-row>
+
+      <ion-row>
+          <ion-col>
+              <ion-segment value="abilities" (ionChange)="onChange($event)">
+                  <ion-segment-button value="abilities">
+                    <ion-label>Abilities</ion-label>
+                  </ion-segment-button>
+                  
+                  <ion-segment-button value="skills">
+                    <ion-label>Skills</ion-label>
+                  </ion-segment-button>
+
+                  <ion-segment-button value="proficiencies">
+                    <ion-label>Proficiencies</ion-label>
+                  </ion-segment-button>
+                </ion-segment>
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-grid class="table-theme">
+            <ion-row class="table-header ion-align-items-center">
+              <ion-col size="4"> Attribute </ion-col>
+              
+              <ion-col size="3"> Score </ion-col>
+              
+              <ion-col size="2"> Mod </ion-col>
+              
+              <ion-col size="3"> Save </ion-col>
+            </ion-row>
+            
+            <ion-row *ngFor="let attribute of attributes" class="ion-align-items-center">
+              <ion-col size="4">{{ attribute?.name }}</ion-col>
+              
+              <ion-col size="3">
+                <app-passive-stat
+                  [score]="attribute.score"
+                ></app-passive-stat>
+              </ion-col>
+              
+              <ion-col size="2">
+                <app-passive-stat
+                [score]="attribute.mod"
+              ></app-passive-stat>
+              </ion-col>
+              
+              <ion-col size="3">
+                <ion-button>
+                  {{ attribute?.save }}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-grid class="table-theme">
+            <ion-row class="table-header ion-align-items-center">
+              <ion-col size="10"> Senses </ion-col>
+              
+              <ion-col size="2"> Score </ion-col>
+              
+            </ion-row>
+            
+            <ion-row *ngFor="let sense of senses" class="ion-align-items-center table-row">
+              <ion-col size="10">{{ sense?.name }}</ion-col>
+              
+              <ion-col size="2">
+                <app-passive-stat
+                  [score]="sense.score"
+                ></app-passive-stat>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

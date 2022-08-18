@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -8,12 +9,19 @@ import { MenuController } from '@ionic/angular';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor( private menuCtrl: MenuController ) { }
+  constructor(
+    private menuCtrl: MenuController,
+    private router: Router
+    ) { }
 
   ngOnInit() {}
 
   onOpenMenu() {
     this.menuCtrl.open('main');
+  }
+
+  navigate(path){
+    this.router.navigate(['/', path]);
   }
 
 }

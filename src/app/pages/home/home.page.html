@@ -1,8 +1,11 @@
-<ion-segment (ionChange)="onChange($event)">
-    <ion-segment-button value="friends">
-      <ion-label>Friends</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="enemies">
-      <ion-label>Enemies</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">
+      <span class="accent">Torch</span><span>light</span>
+    </ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

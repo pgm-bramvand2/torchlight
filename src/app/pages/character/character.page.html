@@ -1,94 +1,27 @@
-<ion-content id="main-content">
-
-<!-- <app-main-menu></app-main-menu>
-
-<app-character-bar></app-character-bar> -->
-  <ion-grid>
-      <ion-row>
-          <app-title
-            title="character"
-          ></app-title>
-      </ion-row>
-
-      <ion-row>
-          <ion-col>
-              <ion-segment value="friends" (ionChange)="onChange($event)">
-                  <ion-segment-button value="friends">
-                    <ion-label>Abilities</ion-label>
-                  </ion-segment-button>
-                  
-                  <ion-segment-button value="enemies">
-                    <ion-label>Skills</ion-label>
-                  </ion-segment-button>
-
-                  <ion-segment-button value="enemies">
-                    <ion-label>Proficiencies</ion-label>
-                  </ion-segment-button>
-                </ion-segment>
-          </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-grid class="table-theme">
-            <ion-row class="table-header ion-align-items-center">
-              <ion-col size="4"> Attribute </ion-col>
-              
-              <ion-col size="3"> Score </ion-col>
-              
-              <ion-col size="2"> Mod </ion-col>
-              
-              <ion-col size="3"> Save </ion-col>
-            </ion-row>
-            
-            <ion-row *ngFor="let attribute of attributes" class="ion-align-items-center">
-              <ion-col size="4">{{ attribute?.name }}</ion-col>
-              
-              <ion-col size="3">
-                <app-passive-stat
-                  [score]="attribute.score"
-                ></app-passive-stat>
-              </ion-col>
-              
-              <ion-col size="2">
-                <app-passive-stat
-                [score]="attribute.mod"
-              ></app-passive-stat>
-              </ion-col>
-              
-              <ion-col size="3">
-                <ion-button>
-                  {{ attribute?.save }}
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-grid class="table-theme">
-            <ion-row class="table-header ion-align-items-center">
-              <ion-col size="10"> Senses </ion-col>
-              
-              <ion-col size="2"> Score </ion-col>
-              
-            </ion-row>
-            
-            <ion-row *ngFor="let sense of senses" class="ion-align-items-center">
-              <ion-col size="10">{{ sense?.name }}</ion-col>
-              
-              <ion-col size="2">
-                <app-passive-stat
-                  [score]="sense.score"
-                ></app-passive-stat>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <app-tab-bar></app-tab-bar>
-</ion-content>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="overview">
+      <ion-label>Character</ion-label>
+    
+      <ion-icon name="search"></ion-icon>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="actions">
+      <ion-label>Actions</ion-label>
+    
+      <ion-icon name="card"></ion-icon>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="spells">
+      <ion-label>Spells</ion-label>
+    
+      <ion-icon name="card"></ion-icon>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="inventory">
+      <ion-label>Inventory</ion-label>
+    
+      <ion-icon name="card"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
