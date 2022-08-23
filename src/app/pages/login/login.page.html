@@ -2,9 +2,12 @@
   <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col size="10">
-        <ion-img
-          src="../../../assets/images/torchlight-logo.svg"
-        ></ion-img>
+
+      <ion-img
+      src="../../../assets/images/torchlight-logo.svg"
+      ></ion-img>
+      
+      <ion-title>Login</ion-title>
 
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
           <ion-list>
@@ -15,9 +18,9 @@
                   type="email"
                   ngModel
                   name="email"
-                  placeholder="email"
+                  placeholder="john@doe.com"
                   required
-                  email
+                  inputmode="email"
                 ></ion-input>
               </ion-item>
 
@@ -25,20 +28,20 @@
                 <ion-label position="stacked">Password</ion-label>
                 
                 <ion-input
-                type="password"
-                ngModel
-                name="password"
-                placeholder="password"
-                required
-                email
+                  type="password"
+                  ngModel
+                  name="password"
+                  placeholder="password"
+                  required
+                  inputmode="password"
                 ></ion-input>
               </ion-item>
               
               <ion-item lines="none">
                 <app-button 
-                [onClick]="test"
-                title="Login"
-                type="submit"
+                  [onClick]="test"
+                  title="Login"
+                  type="submit"
                 ></app-button>
               </ion-item>
           </ion-list>

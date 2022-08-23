@@ -10,6 +10,7 @@ export class ButtonComponent implements OnInit {
   @Input() public onClick?: () => void;
   @Input() public color?: string = 'primary';
   @Input() public type?: string;
+  @Input() public disabled?: boolean = false;
 
   constructor() { }
 

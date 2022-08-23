@@ -1,61 +1,63 @@
 <ion-content fullscreen="true">
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)"></form>
   <ion-grid>
-    <ion-row class="ion-align-items-centerr">
-      <ion-col
-        size="10"
-      >
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10">
+
+      <ion-img
+      src="../../../assets/images/torchlight-logo.svg"
+      ></ion-img>
+      
       <ion-title>Register</ion-title>
-        <ion-list>
+
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
           <ion-list>
-            <ion-item>
-              <ion-label position="stacked">Email</ion-label>
-              
-              <ion-input
-                type="email"
-                ngModel
-                name="email"
-                placeholder="email"
-                required
-                email
-              ></ion-input>
-            </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                
+                <ion-input
+                  type="email"
+                  ngModel
+                  name="email"
+                  placeholder="john@doe.com"
+                  required
+                  inputmode="email"
+                ></ion-input>
+              </ion-item>
 
-            <ion-item>
-              <ion-label position="stacked">Password</ion-label>
+              <ion-item>
+                <ion-label position="stacked">Password</ion-label>
+                
+                <ion-input
+                  type="password"
+                  ngModel
+                  name="password"
+                  placeholder="password"
+                  required
+                  inputmode="password"
+                ></ion-input>
+              </ion-item>
               
-              <ion-input
-                type="password"
-                ngModel
-                name="password"
-                placeholder="password"
-                required
-              ></ion-input>
-            </ion-item>
-
-            <ion-item>
-              <ion-label position="stacked">Repeat password</ion-label>
+              <ion-item>
+                <ion-label position="stacked">Repeat password</ion-label>
+                
+                <ion-input
+                  type="password"
+                  ngModel
+                  name="repeatPassword"
+                  placeholder="repeat password"
+                  required
+                  inputmode="password"
+                ></ion-input>
+              </ion-item>
               
-              <ion-input
-                type="password"
-                ngModel
-                name="repeat-password"
-                placeholder="password"
-                required
-              ></ion-input>
-            </ion-item>
-
-            <ion-item lines="none">
-              <ion-button
-                type="submit"
-                color="primary"
-                expand="full"
-                >
-                Register
-              </ion-button>      
-            </ion-item>
+              <ion-item lines="none">
+                <app-button 
+                  title="Register"
+                  type="submit"
+                ></app-button>
+              </ion-item>
           </ion-list>
-        </ion-list>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

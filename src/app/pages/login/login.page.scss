@@ -2,9 +2,33 @@ ion-grid{
     height: 100%;
 }
 
-ion-row{
+ion-row {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
+}
+
+ion-img {
+    margin-bottom: 2.5rem;
+}
+
+ion-title {
+    padding: 0;
+    color: var(--ion-color-primary);
+    font-size: 1.5rem;
+}
+
+ion-item {
+    --padding-start: 0;
+    --border-color: var(--ion-color-primary);
+
+    ion-label {
+        --color: var(--ion-color-primary);
+        font-size: 1.25rem;
+    }
+    
+    ion-input {
+        font-size: .8rem;
+    }
 }

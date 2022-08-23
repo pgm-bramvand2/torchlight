@@ -5,6 +5,7 @@ import { CharacterBarComponent } from './character-bar/character-bar.component';
 import { PassiveStatComponent } from './passive-stat/passive-stat.component';
 import { InspirationButtonComponent } from './inspiration-button/inspiration-button.component';
 import { commonComponents } from './common';
+import { formComponents } from './form';
 
 
 export const sharedComponents = [
@@ -14,5 +15,6 @@ export const sharedComponents = [
     CharacterBarComponent,
     PassiveStatComponent,
     InspirationButtonComponent,
-    ...commonComponents
+    ...commonComponents,
+    ...formComponents
 ];
