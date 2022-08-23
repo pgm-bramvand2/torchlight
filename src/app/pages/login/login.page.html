@@ -1,49 +1,48 @@
 <ion-content fullscreen="true">
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)"></form>
   <ion-grid>
-    <ion-row class="ion-align-items-centerr">
-      <ion-col
-        size="10"
-      >
-        <ion-list>
-          <ion-list>
-            <ion-item>
-              <ion-label position="stacked">Email</ion-label>
-              
-              <ion-input
-                type="email"
-                ngModel
-                name="email"
-                placeholder="email"
-                required
-                email
-              ></ion-input>
-            </ion-item>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10">
+        <ion-img
+          src="../../../assets/images/torchlight-logo.svg"
+        ></ion-img>
 
-            <ion-item>
-              <ion-label position="stacked">Password</ion-label>
-              
-              <ion-input
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <ion-list>
+              <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                
+                <ion-input
+                  type="email"
+                  ngModel
+                  name="email"
+                  placeholder="email"
+                  required
+                  email
+                ></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Password</ion-label>
+                
+                <ion-input
                 type="password"
                 ngModel
                 name="password"
                 placeholder="password"
                 required
                 email
-              ></ion-input>
-            </ion-item>
-
-            <ion-item lines="none">
-              <ion-button
+                ></ion-input>
+              </ion-item>
+              
+              <ion-item lines="none">
+                <app-button 
+                [onClick]="test"
+                title="Login"
                 type="submit"
-                color="primary"
-                expand="full"
-                >
-                Login
-              </ion-button>      
-            </ion-item>
+                ></app-button>
+              </ion-item>
           </ion-list>
-        </ion-list>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

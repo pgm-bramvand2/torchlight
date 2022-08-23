@@ -15,4 +15,8 @@ export class LoginPage implements OnInit {
   onSubmit(form) {
     console.log(form);
   }
+
+  test() {
+    console.log('clickerdeclick');
+  }
 }
