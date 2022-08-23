@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "582644828607",
+    "project_id": "torchlight-2d779",
+    "storage_bucket": "torchlight-2d779.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582644828607:android:cd6956ab4206f8d143790a",
+        "android_client_info": {
+          "package_name": "torchlight.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582644828607-c6csga5pgh6frla747t8khrg0j7pi492.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGdjhb698TO0UBIrHRvUp8Pjt46FS7RDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582644828607-c6csga5pgh6frla747t8khrg0j7pi492.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

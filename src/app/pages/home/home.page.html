@@ -1,11 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title slot="start">
-      <span class="accent">Torch</span><span>light</span>
-    </ion-title>
-    
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-content fullscreen="true">
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10">  
+        <ion-img
+          src="../../../assets/images/torchlight-logo.svg"
+        ></ion-img>
+
+        <app-button 
+          (click)="navigate('login')"
+          title="Login"
+          type="submit"
+          expand="block"
+        ></app-button>
+            
+        <app-button 
+          (click)="navigate('register')"
+          title="Register"
+          type="submit"
+          expand="block"
+          fill="outline"
+        ></app-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

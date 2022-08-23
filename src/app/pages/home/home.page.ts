@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -8,7 +9,10 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage {
 
-  constructor(private menuCtrl: MenuController) {}
+  constructor(
+    private menuCtrl: MenuController,
+    private router: Router
+    ) {}
 
   async openMenu() {
     await this.menuCtrl.open();
@@ -17,5 +21,10 @@ export class HomePage {
   onChange(event) {
     console.log(event);
 
+  }
+
+  navigate(route: string) {
+    console.log(route);
+    this.router.navigate(['/', route]);
   }
 }
