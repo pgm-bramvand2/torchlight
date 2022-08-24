@@ -55,6 +55,11 @@ export class AuthService {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
     .then((res) => {
       this.setUserData(res.user);
+      this.fireAuth.authState.subscribe((user) => {
+        if(user) {
+          this.router.navigate(['characters']);
+        }
+      });
     })
     .catch((error) => {
       window.alert(error.message);

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,14 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form) {
-    console.log(form);
+  async onSubmit() {
+    if(this.loginForm.valid) {
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+
+      await this.authService.signIn(email, password);
+    }
   }
 
   test() {

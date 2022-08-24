@@ -9,7 +9,7 @@
       
       <ion-title>Register</ion-title>
 
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <form #f="ngForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <ion-list>
               <ion-item>
                 <ion-label position="stacked">Email</ion-label>
@@ -21,7 +21,12 @@
                   placeholder="john@doe.com"
                   required
                   inputmode="email"
+                  formControlName="email"
                 ></ion-input>
+
+                <app-error-message 
+                  [control]="registerForm.controls.email"
+                ></app-error-message>
               </ion-item>
 
               <ion-item>
@@ -34,7 +39,12 @@
                   placeholder="password"
                   required
                   inputmode="password"
+                  formControlName="password"
                 ></ion-input>
+
+                <app-error-message 
+                [control]="registerForm.controls.password"
+              ></app-error-message>
               </ion-item>
               
               <ion-item>
@@ -47,13 +57,25 @@
                   placeholder="repeat password"
                   required
                   inputmode="password"
+                  formControlName="repeatPassword"
                 ></ion-input>
+
+                <app-error-message 
+                  [control]="registerForm.controls.repeatPassword"
+                ></app-error-message>
+              </ion-item>
+
+              <ion-item *ngIf="registerForm.hasError('notSame')" >
+                <app-error-message 
+                  [control]="registerForm"
+                ></app-error-message>
               </ion-item>
               
               <ion-item lines="none">
                 <app-button 
                   title="Register"
                   type="submit"
+                  [disabled]="!registerForm.valid"
                 ></app-button>
               </ion-item>
           </ion-list>

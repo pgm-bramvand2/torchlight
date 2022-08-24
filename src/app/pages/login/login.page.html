@@ -9,7 +9,7 @@
       
       <ion-title>Login</ion-title>
 
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <form #f="ngForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <ion-list>
               <ion-item>
                 <ion-label position="stacked">Email</ion-label>
@@ -21,7 +21,12 @@
                   placeholder="john@doe.com"
                   required
                   inputmode="email"
+                  formControlName="email"
                 ></ion-input>
+
+                <app-error-message 
+                  [control]="loginForm.controls.email"
+                ></app-error-message>
               </ion-item>
 
               <ion-item>
@@ -34,7 +39,12 @@
                   placeholder="password"
                   required
                   inputmode="password"
+                  formControlName="password"
                 ></ion-input>
+
+                <app-error-message 
+                  [control]="loginForm.controls.password"
+                ></app-error-message>
               </ion-item>
               
               <ion-item lines="none">

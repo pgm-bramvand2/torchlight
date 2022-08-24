@@ -1,0 +1,8 @@
+<ion-text *ngIf="control && control.errors && (control.dirty || control.touched)">
+  <small *ngIf="control.errors.required">This field is required</small>
+  <small *ngIf="control.errors.unique">Unique</small>
+  <small *ngIf="control.errors.minlength">Input is too short.</small>
+  <small *ngIf="control.errors.maxlength">Input is too long.</small>
+  <small *ngIf="control.errors.email">Must be a valid email address.</small>
+  <small *ngIf="control.errors.match">Passwords must match.</small>
+</ion-text>
