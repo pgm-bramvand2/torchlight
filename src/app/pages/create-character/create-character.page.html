@@ -1,0 +1,67 @@
+<ion-content fullscreen="true">
+  <form #f="ngForm" [formGroup]="characterForm">
+    <div>
+      <ion-label position="stacked">Character name</ion-label>
+                  
+      <ion-input
+        type="text"
+        ngModel
+        name="name"
+        placeholder="Hero"
+        required
+        formControlName="name"
+      ></ion-input>
+  
+      <app-error-message 
+        [control]="characterForm.controls.name"
+      ></app-error-message>
+    </div>
+
+    <div>
+      <ion-label position="stacked">Character race</ion-label>
+                  
+      <ion-select 
+        value="human"
+        formControlName="race"
+      >
+        <ion-select-option value="human">Human</ion-select-option>
+        <ion-select-option value="elf">Elf</ion-select-option>
+        <ion-select-option value="dwarf">Dwarf</ion-select-option>
+      </ion-select>
+  
+      <app-error-message 
+        [control]="characterForm.controls.name"
+      ></app-error-message>
+    </div>
+    
+    <div>
+      <ion-label position="stacked">Character race</ion-label>
+      
+      <ion-textarea 
+      placeholder="Character description"
+      formControlName="description"
+      ></ion-textarea>
+      
+      <app-error-message 
+      [control]="characterForm.controls.name"
+      ></app-error-message>
+    </div>
+
+    <div>
+      <ion-label position="stacked">Character race</ion-label>
+                  
+      <ion-select 
+        value="fighter"
+        formControlName="class"
+      >
+        <ion-select-option value="fighter">Fighter</ion-select-option>
+        <ion-select-option value="wizard">Wizard</ion-select-option>
+        <ion-select-option value="rogue">Rogue</ion-select-option>
+      </ion-select>
+  
+      <app-error-message 
+        [control]="characterForm.controls.name"
+      ></app-error-message>
+    </div>
+  </form>
+</ion-content>
