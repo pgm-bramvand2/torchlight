@@ -1,5 +1,5 @@
 <ion-content fullscreen="true">
-  <form #f="ngForm" [formGroup]="characterForm">
+  <form #f="ngForm" [formGroup]="characterForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="stacked">Character name</ion-label>
                   
@@ -257,63 +257,13 @@
           </ion-button>
         </ion-buttons>
       </div>
-      
-      <!-- <ion-label position="stacked">Dexterity</ion-label>          
-      <ion-input
-      type="number"
-      required
-      formControlName="dexterity"
-      max="15"
-      min="0"
-      (ionChange)="onChange()"
-      ></ion-input>
-      
-      <ion-label position="stacked">Constitution</ion-label>          
-      <ion-input
-      type="number"
-      required
-      formControlName="constitution"
-      max="15"
-      min="0"
-      (ionChange)="onChange()"
-      ></ion-input>
-      
-      <ion-label position="stacked">Intelligence</ion-label>          
-      <ion-input
-      type="number"
-      required
-      formControlName="intelligence"
-      max="15"
-      min="0"
-      (ionChange)="onChange()"
-      ></ion-input>
-      
-      <ion-label position="stacked">Wisdom</ion-label>          
-      <ion-input
-      type="number"
-      required
-      formControlName="wisdom"
-      max="15"
-      min="0"
-      (ionChange)="onChange()"
-      ></ion-input>
-      
-      <ion-label position="stacked">Charisma</ion-label>          
-      <ion-input
-        type="number"
-        required
-        formControlName="charisma"
-        max="15"
-        min="0"
-        (ionChange)="onChange()"
-      ></ion-input> -->
     </ion-item>
 
 
   <app-button 
-                  title="Create"
-                  type="submit"
-                  [disabled]="!characterForm.valid"
-                ></app-button>
+    title="Create"
+    type="submit"
+    [disabled]="amountOfPoints !== 0 || characterForm.valid === false"
+  ></app-button>
   </form>
 </ion-content>

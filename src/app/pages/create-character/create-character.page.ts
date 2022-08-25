@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { pairwise, startWith, tap } from 'rxjs/operators';
+import { pairwise, startWith, tap, switchMap } from 'rxjs/operators';
+import { ApiService } from 'src/app/shared/services/api/api.service';
 
 @Component({
   selector: 'app-create-character',
@@ -27,13 +28,14 @@ export class CreateCharacterPage implements OnInit {
       charisma: [ 8 , [Validators.required, Validators.max(16)]],
     }),
   });
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private apiService: ApiService
+    ) { }
 
   ngOnInit() {
     this.characterForm.get('race').valueChanges.pipe(
-      // switchMap((value) => {
-      // api call return this.apiservice.getraceinfo(value)
-      // })
+      switchMap((value) => this.apiService.getRace(value)),
       tap(console.log)
     ).subscribe();
 
@@ -56,23 +58,22 @@ export class CreateCharacterPage implements OnInit {
       pairwise(),
       tap(console.log),
       tap(([current, previous]) => {
-
         const previousValue = previous || 8;
-             if(current < previousValue) {
-                if(current < 13 ) {
-                  this.amountOfPoints--;
-                } else {
-                  this.amountOfPoints-=2;
-                }
-             } else {
-              if(current <= 13) {
-                this.amountOfPoints++;
-              } else {
-                this.amountOfPoints+=2;
-              }
+        if(current < previousValue) {
+          if(current < 13 ) {
+            this.amountOfPoints--;
+          } else {
+            this.amountOfPoints-=2;
+          }
+        } else {
+        if(current <= 13) {
+          this.amountOfPoints++;
+        } else {
+          this.amountOfPoints+=2;
+        }
 
-              return;
-             };
+        return;
+        };
       })
     ).subscribe();
   }
@@ -85,5 +86,9 @@ export class CreateCharacterPage implements OnInit {
     } else {
       abilityScore.setValue(abilityScoreValue - 1);
     }
+  }
+
+  onSubmit() {
+    console.log(this.characterForm.value);
   }
 }
