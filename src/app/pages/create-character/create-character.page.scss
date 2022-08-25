@@ -1,0 +1,23 @@
+.attribute {
+    position: relative;
+
+    ion-buttons {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        ion-button {
+            background-color: var(--ion-color-primary);
+            border-radius: .5rem;
+            --ripple-color: #fff;
+
+            ion-icon {
+                color: #fff;
+            }
+
+            &:disabled {
+                opacity: 50%;
+            }
+        }
+    }
+}
