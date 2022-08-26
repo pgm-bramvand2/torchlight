@@ -82,7 +82,7 @@ export class CreateCharacterPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    const user = this.localStorageService.getUser();
+    const user = this.localStorageService.getStorageItem('user');
     this.characterForm.get('userId').setValue(user.uid);
 
     this.characterForm.get('race').valueChanges.pipe(
@@ -225,8 +225,6 @@ export class CreateCharacterPage implements OnInit {
 
   async onSubmit() {
     await this.presentAlertConfirm();
-
-    console.log(this.confirmed);
 
     if(this.confirmed === 'confirm') {
       this.addBonusesToAbilityScores();

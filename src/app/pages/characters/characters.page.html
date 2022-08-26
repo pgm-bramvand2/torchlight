@@ -25,7 +25,11 @@
                     </ion-item>
                     
                     
-                    <ion-item *ngFor="let character of characters">
+                    <ion-item 
+                        button
+                        (click)="onClickCharacter(character)"
+                        *ngFor="let character of characters"
+                    >
                         <ion-thumbnail slot="start">
                             <ion-img src="https://geekculture.co/wp-content/uploads/2021/05/drizzt-dungeons-and-dragons.jpg"></ion-img>
                         </ion-thumbnail>

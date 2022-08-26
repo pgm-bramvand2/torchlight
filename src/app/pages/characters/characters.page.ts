@@ -20,14 +20,22 @@ export class CharactersPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.localStorageService.getUser();
+    this.user = this.localStorageService.getStorageItem('user');
     this.fireStoreService.getUserCharacters(this.user.uid).pipe(
-      tap((characters) => this.characters = characters)
+      tap((characters) => {
+        this.characters = characters;
+        this.localStorageService.setStorageItem('characters', characters);
+      })
     ).subscribe();
 
   }
 
-  onClickCreate(){
+  onClickCreate() {
     this.router.navigate(['create-character']);
+  }
+
+  onClickCharacter(character) {
+    this.localStorageService.setStorageItem('character', character);
+    this.router.navigate(['character']);
   }
 }

@@ -7,15 +7,20 @@ export class LocalstorageService {
 
   constructor() { }
 
-  setUser(data) {
-    localStorage.setItem('user', JSON.stringify(data));
+  setStorageItem(item: string, data) {
+    localStorage.setItem(item, JSON.stringify(data));
   }
 
-  getUser() {
-    return JSON.parse(localStorage.getItem('user'));
+  getStorageItem(item: string) {
+    return JSON.parse(localStorage.getItem(item));
   }
 
-  removeUser(){
-    localStorage.removeItem('user');
+  removeStorageItem(item: string){
+    localStorage.removeItem(item);
   }
+
+  clearStorage() {
+    localStorage.clear();
+  }
+
 }

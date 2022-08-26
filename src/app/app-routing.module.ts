@@ -8,11 +8,12 @@ import { AuthGuard } from './shared/guards/auth/auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch:'full'},
   {
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     path: 'character',
     loadChildren: () => import('./pages/character/character.module').then( m => m.CharacterPageModule)
   },
   {
+    canActivate: [AuthGuard],
     path: 'characters',
     loadChildren: () => import('./pages/characters/characters.module').then( m => m.CharactersPageModule)
   },
@@ -25,6 +26,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
+    canActivate: [AuthGuard],
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
@@ -33,6 +35,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
+    canActivate: [AuthGuard],
     path: 'create-character',
     loadChildren: () => import('./pages/create-character/create-character.module').then( m => m.CreateCharacterPageModule)
   },

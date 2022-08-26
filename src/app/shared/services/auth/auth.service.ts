@@ -22,21 +22,21 @@ export class AuthService {
       this.fireAuth.authState.subscribe((user) => {
         if(user) {
           this.userData = user;
-          this.localStorageService.setUser(this.userData);
-          this.localStorageService.getUser();
+          this.localStorageService.setStorageItem('user', this.userData);
+          this.localStorageService.getStorageItem('user');
           localStorage.setItem('user', JSON.stringify(this.userData));
           JSON.parse(localStorage.getItem('user'));
       } else {
-        this.localStorageService.setUser('null');
-        this.localStorageService.getUser();
+        // this.localStorageService.setStorageItem('user','null');
+        this.localStorageService.getStorageItem('user');
       }
     });
 
   }
 
   get isLoggedIn(): boolean {
-    const user = this.localStorageService.getUser();
-    return user !== null? true: false;
+    const user = this.localStorageService.getStorageItem('user');
+    return !!user;
   }
 
   async signIn(email: string, password: string) {
@@ -72,7 +72,8 @@ export class AuthService {
 
   async signOut() {
     return this.fireAuth.signOut().then(() => {
-      this.localStorageService.removeUser();
+      this.localStorageService.clearStorage();
+      console.log(this.localStorageService.getStorageItem('user'));
       this.router.navigate(['home']);
     });
   }
