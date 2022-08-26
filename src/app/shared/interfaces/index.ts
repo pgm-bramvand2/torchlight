@@ -1,1 +1,2 @@
-export { Race } from './race.enum';
+export { CharacterRace } from './character-race.enum';
+export { CharacterClass } from './character-class.enum';

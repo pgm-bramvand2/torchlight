@@ -11,7 +11,10 @@
 
             <ion-col size="10" offset="1">
                 <ion-list>
-                    <ion-item>
+                    <ion-item
+                        button
+                        (click)="onClickCreate()"
+                    >
                         <ion-thumbnail slot="start" class="add-thumbnail">
                             <ion-icon name="add"></ion-icon>
                         </ion-thumbnail>
@@ -21,36 +24,15 @@
                         </ion-label>
                     </ion-item>
                     
-                    <ion-item>
+                    
+                    <ion-item *ngFor="let character of characters">
                         <ion-thumbnail slot="start">
                             <ion-img src="https://geekculture.co/wp-content/uploads/2021/05/drizzt-dungeons-and-dragons.jpg"></ion-img>
                         </ion-thumbnail>
                         
                         <ion-label>
-                            <strong>Drizzt Do'urden</strong>
-                            <small>Level 20 Ranger</small>
-                        </ion-label>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-thumbnail slot="start">
-                            <ion-img src="https://geekculture.co/wp-content/uploads/2021/05/drizzt-dungeons-and-dragons.jpg"></ion-img>
-                        </ion-thumbnail>
-                        
-                        <ion-label>
-                            <strong>Drizzt Do'urden</strong>
-                            <small>Level 20 Ranger</small>
-                        </ion-label>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-thumbnail slot="start">
-                            <ion-img src="https://geekculture.co/wp-content/uploads/2021/05/drizzt-dungeons-and-dragons.jpg"></ion-img>
-                        </ion-thumbnail>
-                        
-                        <ion-label>
-                            <strong>Drizzt Do'urden</strong>
-                            <small>Level 20 Ranger</small>
+                            <strong>{{ character.name }}</strong>
+                            <small>Level {{ character.level }} {{ character.class }}</small>
                         </ion-label>
                     </ion-item>
                 </ion-list>

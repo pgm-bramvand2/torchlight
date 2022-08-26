@@ -1,0 +1,22 @@
+.picker {
+    max-width: 100%;
+    height: 8rem;
+    max-height: 10rem;
+    border: 1px solid var(--ion-color-primary);
+    background-color: var(--ion-color-light);
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  input[type='file'] {
+    display: none;
+  }
+  

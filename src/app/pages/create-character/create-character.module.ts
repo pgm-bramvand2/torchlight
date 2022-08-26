@@ -8,6 +8,7 @@ import { CreateCharacterPageRoutingModule } from './create-character-routing.mod
 
 import { CreateCharacterPage } from './create-character.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FileSizePipe } from 'src/app/shared/pipes/file-size.pipe';
 
 @NgModule({
   imports: [

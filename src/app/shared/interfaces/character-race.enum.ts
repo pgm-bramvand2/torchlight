@@ -1,4 +1,4 @@
-export enum Race {
+export enum CharacterRace {
     human,
     dwarf,
     elf

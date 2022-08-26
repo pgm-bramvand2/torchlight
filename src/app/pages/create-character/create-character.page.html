@@ -1,5 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Character creation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content fullscreen="true">
   <form #f="ngForm" [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+    <app-image-picker
+      [showPreview]="true"
+      (imagePick)="onImagePick($event)"
+    >
+    </app-image-picker>
+
+
     <ion-item>
       <ion-label position="stacked">Character name</ion-label>
                   
@@ -19,6 +32,7 @@
       <ion-label position="stacked">Character race</ion-label>
                   
       <ion-select 
+        placeholder="Choose race"
         formControlName="race"
       >
         <ion-select-option value="human">Human</ion-select-option>
@@ -27,7 +41,7 @@
       </ion-select>
   
       <app-error-message 
-        [control]="characterForm.controls.name"
+        [control]="characterForm.controls.race"
       ></app-error-message>
     </ion-item>
     
@@ -40,14 +54,15 @@
       ></ion-textarea>
       
       <app-error-message 
-      [control]="characterForm.controls.name"
+      [control]="characterForm.controls.description"
       ></app-error-message>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Character race</ion-label>
+      <ion-label position="stacked">Character class</ion-label>
                   
       <ion-select 
+        placeholder="Choose class"
         formControlName="class"
       >
         <ion-select-option value="fighter">Fighter</ion-select-option>
@@ -56,214 +71,125 @@
       </ion-select>
   
       <app-error-message 
-        [control]="characterForm.controls.name"
+        [control]="characterForm.controls.class"
       ></app-error-message>
     </ion-item>
 
-    <ion-item formGroupName="abilities">
-      <ion-item>
-        <ion-title>Attributes</ion-title>
-        <ion-label>{{ amountOfPoints }} / {{ maxPoints}}</ion-label>
-      </ion-item>
-      
-      <ion-label position="stacked">Strength</ion-label>          
-      <div class="attribute">
-        <ion-input
-        type="number"
-        required
-        formControlName="strength"
-        max="15"
-        min="0"
-        (ionChange)="onChange()"
-        [disabled]="true"
-        ></ion-input>
-
-        <ion-buttons>
-          <ion-button 
-            color="primary" 
-            slot="icon-only"
-            (click)="adjustAbility('decrease','strength')"
-            [disabled]="this.characterForm.get(['abilities','strength']).value === 8 "
-            >
-            <ion-icon icon="remove"></ion-icon>
-          </ion-button>
-          <ion-button 
-          color="primary" 
-          slot="icon-only"
-            (click)="adjustAbility('increase','strength')"
-            [disabled]="this.characterForm.get(['abilities','strength']).value === 15 || amountOfPoints === 0"
-          >
-            <ion-icon icon="add"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </div>
-
-
-      <ion-label position="stacked">Dexterity</ion-label>          
-      <div class="attribute">
-        <ion-input
-        type="number"
-        required
-        formControlName="dexterity"
-        max="15"
-        min="0"
-        (ionChange)="onChange()"
-        [disabled]="true"
-        ></ion-input>
-
-        <ion-buttons>
-          <ion-button 
-            color="primary" 
-            slot="icon-only"
-            (click)="adjustAbility('decrease','dexterity')"
-            [disabled]="this.characterForm.get(['abilities','dexterity']).value === 8 "
-            >
-            <ion-icon icon="remove"></ion-icon>
-          </ion-button>
-          <ion-button 
-          color="primary" 
-          slot="icon-only"
-            (click)="adjustAbility('increase','dexterity')"
-            [disabled]="this.characterForm.get(['abilities','dexterity']).value === 15 || amountOfPoints === 0"
-          >
-            <ion-icon icon="add"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </div>
-
-      <ion-label position="stacked">Constitution</ion-label>          
-      <div class="attribute">
-        <ion-input
-        type="number"
-        required
-        formControlName="constitution"
-        max="15"
-        min="0"
-        (ionChange)="onChange()"
-        [disabled]="true"
-        ></ion-input>
-
-        <ion-buttons>
-          <ion-button 
-            color="primary" 
-            slot="icon-only"
-            (click)="adjustAbility('decrease','constitution')"
-            [disabled]="this.characterForm.get(['abilities','constitution']).value === 8 "
-            >
-            <ion-icon icon="remove"></ion-icon>
-          </ion-button>
-          <ion-button 
-          color="primary" 
-          slot="icon-only"
-            (click)="adjustAbility('increase','constitution')"
-            [disabled]="this.characterForm.get(['abilities','constitution']).value === 15 || amountOfPoints === 0"
-          >
-            <ion-icon icon="add"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </div>
-      <ion-label position="stacked">Intelligence</ion-label>          
-      <div class="attribute">
-        <ion-input
-        type="number"
-        required
-        formControlName="intelligence"
-        max="15"
-        min="0"
-        (ionChange)="onChange()"
-        [disabled]="true"
-        ></ion-input>
-
-        <ion-buttons>
-          <ion-button 
-            color="primary" 
-            slot="icon-only"
-            (click)="adjustAbility('decrease','intelligence')"
-            [disabled]="this.characterForm.get(['abilities','intelligence']).value === 8 "
-            >
-            <ion-icon icon="remove"></ion-icon>
-          </ion-button>
-          <ion-button 
-          color="primary" 
-          slot="icon-only"
-            (click)="adjustAbility('increase','intelligence')"
-            [disabled]="this.characterForm.get(['abilities','intelligence']).value === 15 || amountOfPoints === 0"
-          >
-            <ion-icon icon="add"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </div>
-
-      <ion-label position="stacked">Wisdom</ion-label>          
-      <div class="attribute">
-        <ion-input
-        type="number"
-        required
-        formControlName="wisdom"
-        max="15"
-        min="0"
-        (ionChange)="onChange()"
-        [disabled]="true"
-        ></ion-input>
-
-        <ion-buttons>
-          <ion-button 
-            color="primary" 
-            slot="icon-only"
-            (click)="adjustAbility('decrease','wisdom')"
-            [disabled]="this.characterForm.get(['abilities','wisdom']).value === 8 "
-            >
-            <ion-icon icon="remove"></ion-icon>
-          </ion-button>
-          <ion-button 
-          color="primary" 
-          slot="icon-only"
-            (click)="adjustAbility('increase','wisdom')"
-            [disabled]="this.characterForm.get(['abilities','wisdom']).value === 15 || amountOfPoints === 0"
-          >
-            <ion-icon icon="add"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </div>
-
-      <ion-label position="stacked">Charisma</ion-label>          
-      <div class="attribute">
-        <ion-input
-        type="number"
-        required
-        formControlName="charisma"
-        max="15"
-        min="0"
-        (ionChange)="onChange()"
-        [disabled]="true"
-        ></ion-input>
-
-        <ion-buttons>
-          <ion-button 
-            color="primary" 
-            slot="icon-only"
-            (click)="adjustAbility('decrease','charisma')"
-            [disabled]="this.characterForm.get(['abilities','charisma']).value === 8 "
-            >
-            <ion-icon icon="remove"></ion-icon>
-          </ion-button>
-          <ion-button 
-          color="primary" 
-          slot="icon-only"
-            (click)="adjustAbility('increase','charisma')"
-            [disabled]="this.characterForm.get(['abilities','charisma']).value === 15 || amountOfPoints === 0"
-          >
-            <ion-icon icon="add"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </div>
+    <ion-item *ngIf="characterForm.controls.class.valid">
+      <ion-label position="stacked">Choose {{ profAmount }} proficiencies</ion-label>
+                  
+      <ion-select 
+        placeholder="Choose proficiencies"
+        formControlName="proficiencies"
+        [multiple]="true"
+      >
+        <ion-select-option 
+          *ngFor="let choice of profChoices" 
+          [value]="choice.item.index"
+          [disabled]="checkChoicesAmount(choice.item.index)"
+        >
+          {{ choice.item.name }}
+        </ion-select-option>
+      </ion-select>
+  
+      <app-error-message 
+        [control]="characterForm.controls.proficiencies"
+      ></app-error-message>
     </ion-item>
 
+    <ion-item
+      class="abilities" 
+      formGroupName="abilities"
+    >
+    
+    
+    <ion-grid class="table-theme">
+      <ion-row>
+        <ion-col size="12">
+              <ion-title>Attributes</ion-title>
 
-  <app-button 
-    title="Create"
-    type="submit"
-    [disabled]="amountOfPoints !== 0 || characterForm.valid === false"
-  ></app-button>
+              <ion-label>Points left: {{ amountOfPoints }} / {{ maxPoints}}</ion-label>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="table-header ion-align-items-center">
+          <ion-col size="3"> Attribute </ion-col>
+          
+          <ion-col size="2">Bonus</ion-col>
+          
+          <ion-col size="2"> Score </ion-col>
+          
+          <ion-col size="2">Total</ion-col>
+
+          <ion-col size="3"></ion-col>
+        </ion-row>
+
+        <ion-row 
+          class="ability-container ion-align-items-center"
+          *ngFor="let ability of abilityNames"
+          >
+          <ion-col size="3">{{ ability.name }}</ion-col>          
+          
+          <ion-col size="2">
+            <div *ngIf="checkForBonus(ability.index)">
+              + {{ checkForBonus(ability.index) }}
+            </div>
+          </ion-col>
+          
+          <ion-col size="2">
+            <ion-input
+            type="number"
+            required
+            [formControlName]="ability.index"
+            max="15"
+            min="0"
+            [disabled]="true"
+            [hidden]="true"
+            ></ion-input>
+            <app-passive-stat [score]="this.characterForm.get(['abilities', ability.index]).value"></app-passive-stat>
+          </ion-col>
+          
+          <ion-col size="2">
+            <app-passive-stat [score]="calcAbilityTotal(ability.index)"></app-passive-stat>
+          </ion-col>
+          
+          <ion-col size="3">
+            <ion-buttons>
+              <ion-button 
+                color="primary" 
+                slot="icon-only"
+                (click)="adjustAbility('decrease', ability.index)"
+                [disabled]="this.characterForm.get(['abilities',ability.index]).value === 8 "
+                >
+                <ion-icon icon="remove"></ion-icon>
+              </ion-button>
+              <ion-button 
+              color="primary" 
+              slot="icon-only"
+                (click)="adjustAbility('increase',ability.index)"
+                [disabled]="this.characterForm.get(['abilities',ability.index]).value === 15 || amountOfPoints === 0"
+              >
+                <ion-icon icon="add"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <div class="button-container">
+      <app-button
+        title="Cancel"
+        (click)="navigateBack()"
+        color="tertiary"
+      ></app-button>
+
+      <app-button 
+        title="Create"
+        type="submit"
+        [disabled]="amountOfPoints !== 0 || characterForm.valid === false"
+      ></app-button>
+  
+    </div>
   </form>
 </ion-content>

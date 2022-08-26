@@ -1,23 +1,86 @@
-.attribute {
-    position: relative;
+label {
+    font-size: 2rem;
+}
 
-    ion-buttons {
-        position: absolute;
-        top: 0;
-        right: 0;
+.table-theme {
+    width: 100%;
+    text-transform: capitalize;
+    margin-top: 1rem;
+    padding: 0;
+    
+    
+    .table-header {
+        font-size: 8.75rem!important;
+        padding-bottom: .5rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--ion-color-primary);
+    }
+    
+    ion-row {
+        margin-bottom: .5rem;
+        &:nth-child(even) {
+            background-color: var(--ion-color-light);
+        }
 
-        ion-button {
-            background-color: var(--ion-color-primary);
-            border-radius: .5rem;
-            --ripple-color: #fff;
-
-            ion-icon {
-                color: #fff;
+        ion-col {
+            padding: 0;
+            text-align: center;
+            font-size: .8rem;
+    
+            &:first-child {
+                text-align: start;
             }
 
-            &:disabled {
-                opacity: 50%;
+            &:last-child {
+                text-align: end;
+            }
+
+            ion-title, ion-label {
+                text-align: left;
+            }
+
+            ion-title {
+                padding-left: 0;
+            }
+
+            ion-label {
+                color: var(--ion-color-primary)
+            }
+
+            ion-button {
+                background-color: var(--ion-color-primary);
+                border-radius: .5rem;
+                --ripple-color: #fff;
+    
+                ion-icon {
+                    color: #fff;
+                }
+    
+                &:disabled {
+                    opacity: 50%;
+                }
             }
         }
+    }
+
+    
+}
+
+.button-container {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+ion-grid {
+    padding: 0 2rem;
+    margin: 1rem 0;
+    
+
+    ion-segment-button {
+        font-size: .75rem;
     }
 }

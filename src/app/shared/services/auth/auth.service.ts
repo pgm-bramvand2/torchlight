@@ -2,6 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { LocalstorageService } from '../localstorage/localstorage.service';
 import { User } from './interfaces';
 
 
@@ -12,6 +13,7 @@ export class AuthService {
   userData: any;
 
   constructor(
+    private localStorageService: LocalstorageService,
     public firestore: AngularFirestore,
     public fireAuth: AngularFireAuth,
     public router: Router,
@@ -20,18 +22,20 @@ export class AuthService {
       this.fireAuth.authState.subscribe((user) => {
         if(user) {
           this.userData = user;
+          this.localStorageService.setUser(this.userData);
+          this.localStorageService.getUser();
           localStorage.setItem('user', JSON.stringify(this.userData));
           JSON.parse(localStorage.getItem('user'));
       } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user'));
+        this.localStorageService.setUser('null');
+        this.localStorageService.getUser();
       }
     });
 
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = this.localStorageService.getUser();
     return user !== null? true: false;
   }
 
@@ -68,7 +72,7 @@ export class AuthService {
 
   async signOut() {
     return this.fireAuth.signOut().then(() => {
-      localStorage.removeItem('user');
+      this.localStorageService.removeUser();
       this.router.navigate(['home']);
     });
   }
