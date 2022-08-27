@@ -22,7 +22,7 @@ export class CreateCharacterPage implements OnInit {
   profChoices;
   confirmed: string;
 
-  abilityNames = [
+  abilities = [
     {
       index: 'str',
       name: 'Strength'
@@ -49,7 +49,6 @@ export class CreateCharacterPage implements OnInit {
     },
   ];
 
-
   characterForm = this.fb.group({
     // avatarUrl: [null, Validators.required],
     userId: [null, Validators.required],
@@ -69,6 +68,7 @@ export class CreateCharacterPage implements OnInit {
       cha: [ 8 , [Validators.required, Validators.max(16)]],
     }),
     abilityBonuses: [[]],
+    abilityProficiencies: [[], Validators.required],
     proficiencies: [[], [Validators.required]],
   });
   constructor(
@@ -114,6 +114,13 @@ export class CreateCharacterPage implements OnInit {
 
       this.profAmount = classData.proficiency_choices[0].choose;
       this.profChoices = classData.proficiency_choices[0].from.options;
+
+      const abilityProficiencies = this.characterForm.get('abilityProficiencies');
+      abilityProficiencies.setValue([]);
+
+      classData.saving_throws.forEach(ability => {
+        abilityProficiencies.setValue([...abilityProficiencies.value, ability.index]);
+      });
     });
 
     const abilities = Object.keys(this.characterForm.value.abilities);

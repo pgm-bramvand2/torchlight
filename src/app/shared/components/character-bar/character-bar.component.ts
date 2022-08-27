@@ -24,17 +24,20 @@ export class CharacterBarComponent implements OnInit {
 
   ngOnInit() {
     this.character = this.localStorageService.getStorageItem('character');
-    this.setCharacter();
     this.setCurrentHp();
-    this.initiative = this.scoreCalculatorService.addPlusSign(this.character.initiative);
-    this.proficiencyBonus= this.scoreCalculatorService.addPlusSign(this.character.proficiencyBonus);
+    this.setCharacter();
+  }
+
+  updateCharacter(character) {
+    this.localStorageService.setStorageItem('character', character);
+    this.character = character;
   }
 
 
   setCurrentHp() {
     if(!this.character.currentHp) {
       this.firestoreService.updateCharacter(this.character.id, {currentHp: this.character.totalHp});
-      this.localStorageService.setStorageItem('character', {
+      this.updateCharacter({
         ...this.character,
         currentHp: this.character.totalHp
       });
@@ -42,16 +45,30 @@ export class CharacterBarComponent implements OnInit {
   }
 
   setCharacter() {
-    const scores = {
-      initiative: this.scoreCalculatorService.calcAbilityMod(this.character.abilities.dex),
-      proficiencyBonus: this.scoreCalculatorService.calcProficiencyMod(this.character.level),
-    };
+    if(!this.character.initiative) {
+      const initiativeScore = this.scoreCalculatorService.calcAbilityMod(this.character.abilities.dex);
 
-    this.firestoreService.updateCharacter(this.character.id, { ...scores });
+      this.firestoreService.updateCharacter(this.character.id, {initiative: initiativeScore});
 
-    this.localStorageService.setStorageItem('character', {
-      ...this.character,
-      ...scores
-    });
+      this.updateCharacter({
+        ...this.character,
+        initiative: initiativeScore
+      });
+    }
+
+    this.initiative = this.scoreCalculatorService.addPlusSign(this.character.initiative);
+
+    if(!this.character.proficiencyBonus) {
+      const proficiencyBonusScore = this.scoreCalculatorService.calcAbilityMod(this.character.abilities.dex);
+      this.firestoreService.updateCharacter(this.character.id, {initiative: proficiencyBonusScore});
+
+      this.updateCharacter({
+        ...this.character,
+        proficiencyBonus: proficiencyBonusScore
+      });
+    }
+
+    this.proficiencyBonus= this.scoreCalculatorService.addPlusSign(this.character.proficiencyBonus);
   }
+
 }

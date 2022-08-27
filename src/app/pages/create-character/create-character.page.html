@@ -85,10 +85,10 @@
       >
         <ion-select-option 
           *ngFor="let choice of profChoices" 
-          [value]="choice.item.index"
+          [value]="choice.item.index.replace('skill-', '')"
           [disabled]="checkChoicesAmount(choice.item.index)"
         >
-          {{ choice.item.name }}
+          {{ choice.item.name.replace('Skill: ', '') }}
         </ion-select-option>
       </ion-select>
   
@@ -126,7 +126,7 @@
 
         <ion-row 
           class="ability-container ion-align-items-center"
-          *ngFor="let ability of abilityNames"
+          *ngFor="let ability of abilities"
           >
           <ion-col size="3">{{ ability.name }}</ion-col>          
           

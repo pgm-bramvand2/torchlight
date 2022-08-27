@@ -10,8 +10,12 @@ import { LocalstorageService } from 'src/app/shared/services/localstorage/locals
   styleUrls: ['./characters.page.scss'],
 })
 export class CharactersPage implements OnInit {
-  characters = null;
-  user;
+  user = this.localStorageService.getStorageItem('user');
+  characters$ =  this.fireStoreService.getUserCharacters(this.user.uid).pipe(
+    tap(console.log),
+    tap((characters) => {
+      this.localStorageService.setStorageItem('characters', characters);
+    }));
 
   constructor(
     private router: Router,
@@ -20,13 +24,6 @@ export class CharactersPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.localStorageService.getStorageItem('user');
-    this.fireStoreService.getUserCharacters(this.user.uid).pipe(
-      tap((characters) => {
-        this.characters = characters;
-        this.localStorageService.setStorageItem('characters', characters);
-      })
-    ).subscribe();
 
   }
 

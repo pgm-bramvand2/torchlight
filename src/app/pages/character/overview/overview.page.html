@@ -4,10 +4,13 @@
 
 <ion-content id="main-content">
   <ion-grid>
-      <ion-row>
+      <ion-row class="overview-header">
           <app-title
-            title="character"
+            [title]="character.name"
           ></app-title>
+          <ion-label>
+            Level {{ character.level }} {{ character.race }} {{ character.class }}
+          </ion-label>
       </ion-row>
 
       <ion-row>
@@ -27,45 +30,46 @@
                 </ion-segment>
           </ion-col>
       </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-grid class="table-theme">
-            <ion-row class="table-header ion-align-items-center">
-              <ion-col size="4"> Attribute </ion-col>
+      
+      <div *ngIf="subject === 'abilities'">
+        <ion-row>
+          <ion-col>
+            <ion-grid class="table-theme">
+              <ion-row class="table-header ion-align-items-center">
+                <ion-col size="4"> Attribute </ion-col>
+                
+                <ion-col size="3"> Score </ion-col>
+                
+                <ion-col size="2"> Mod </ion-col>
+                
+                <ion-col size="3"> Save </ion-col>
+              </ion-row>
               
-              <ion-col size="3"> Score </ion-col>
-              
-              <ion-col size="2"> Mod </ion-col>
-              
-              <ion-col size="3"> Save </ion-col>
-            </ion-row>
-            
-            <ion-row *ngFor="let attribute of attributes" class="ion-align-items-center">
-              <ion-col size="4">{{ attribute?.name }}</ion-col>
+              <ion-row *ngFor="let ability of abilities" class="ion-align-items-center">
+              <ion-col size="4">{{ ability?.name }}</ion-col>
               
               <ion-col size="3">
                 <app-passive-stat
-                  [score]="attribute.score"
+                [score]="character.abilities[ability.index]"
                 ></app-passive-stat>
               </ion-col>
               
               <ion-col size="2">
                 <app-passive-stat
-                [score]="attribute.mod"
+                [score]="calcMod(character.abilities[ability.index])"
               ></app-passive-stat>
               </ion-col>
               
               <ion-col size="3">
                 <ion-button>
-                  {{ attribute?.save }}
-                </ion-button>
-              </ion-col>
-            </ion-row>
+                    {{ calcSavingThrow(ability.index) }}
+                  </ion-button>
+                </ion-col>
+              </ion-row>
           </ion-grid>
         </ion-col>
       </ion-row>
-
+      
       <ion-row>
         <ion-col>
           <ion-grid class="table-theme">
@@ -81,12 +85,55 @@
               
               <ion-col size="2">
                 <app-passive-stat
-                  [score]="sense.score"
+                [score]="sense.score"
                 ></app-passive-stat>
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-col>
       </ion-row>
+    </div>
+
+    <div *ngIf="subject === 'skills'">
+        <ion-row>
+          <ion-col>
+            <ion-grid class="table-theme"  *ngIf="(skills$ | async) as skills">
+              <ion-row class="table-header ion-align-items-center">
+                <ion-col size="4"> Skill </ion-col>
+                
+                <ion-col size="3"> Mod </ion-col>
+                
+                <ion-col size="2"> Prof </ion-col>
+                
+                <ion-col size="3"> Bonus </ion-col>
+              </ion-row>
+              
+              <ion-row *ngFor="let skill of skills" class="ion-align-items-center">
+              <ion-col size="4">{{ skill.name}}</ion-col>
+              
+              <ion-col size="3">
+                <app-passive-stat
+                [score]="calcMod(character.abilities[skill.ability_score.index])"
+                ></app-passive-stat>
+              </ion-col>
+              
+              <ion-col size="2">
+                <ion-icon 
+                  [name]="checkSkillProficiency(skill.index)? 'radio-button-on' : 'radio-button-off'" 
+                  color="primary"
+                  ></ion-icon>
+              </ion-col>
+              
+              <ion-col size="3">
+                <ion-button
+                >
+                    {{ calcSkillPRoficiency(skill) }}                    
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </div>
     </ion-grid>
 </ion-content>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { ApiService } from 'src/app/shared/services/api/api.service';
+import { LocalstorageService } from 'src/app/shared/services/localstorage/localstorage.service';
+import { ScoreCalculatorService } from 'src/app/shared/services/score-calculator/score-calculator.service';
 
 @Component({
   selector: 'app-overview',
@@ -6,69 +10,87 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./overview.page.scss'],
 })
 export class OverviewPage implements OnInit {
-  public attributes = [
+  abilities = [
     {
-      name: 'strength',
-      score: 21,
-      mod: '+1',
-      save: '+1'
+      index: 'str',
+      name: 'Strength'
     },
     {
-      name: 'dexterity',
-      score: 21,
-      mod: '+1',
-      save: '+1'
+      index: 'dex',
+      name: 'Dexterity'
     },
     {
-      name: 'constitution',
-      score: 21,
-      mod: '+1',
-      save: '+1'
+      index: 'con',
+      name: 'Constitution'
     },
     {
-      name: 'intelligence',
-      score: 21,
-      mod: '+1',
-      save: '+1'
+      index: 'int',
+      name: 'Intelligence'
     },
     {
-      name: 'wisdom',
-      score: 21,
-      mod: '+1',
-      save: '+1'
+      index: 'wis',
+      name: 'Wisdom'
     },
     {
-      name: 'charisma',
-      score: 21,
-      mod: '+1',
-      save: '+1'
-    }
+      index: 'cha',
+      name: 'Charisma'
+    },
   ];
 
-  public senses = [
+  character = this.localStorageService.getStorageItem('character');
+  senses = [
     {
       name: 'passive perception',
-      score: 12
+      score: this.scoreCalculatorService.calcAbilityMod(this.character.abilities.wis)
     },
     {
       name: 'passive investigation',
-      score: 12
+      score: this.scoreCalculatorService.calcAbilityMod(this.character.abilities.int)
     },
     {
       name: 'insight',
-      score: 12
+      score: this.scoreCalculatorService.calcAbilityMod(this.character.abilities.wis)
     }
   ];
 
-  tableHeader = 'header-dark';
-  tableTheme = 'ion-border table-theme';
+  subject = 'abilities';
+  skills$ = this.apiService.getCharacterSkills().pipe(
+    tap(console.log)
+    );
 
-  constructor() { }
 
-  ngOnInit() {
+
+  constructor(
+    private localStorageService: LocalstorageService,
+    private scoreCalculatorService: ScoreCalculatorService,
+    private apiService: ApiService
+    ) { }
+
+    ngOnInit() {
   }
 
-  onChange(value) {
-    console.log(value);
+  calcMod(score) {
+    return this.scoreCalculatorService.renderAbilityMod(score) ;
+  }
+
+  calcSavingThrow(ability){
+    const bonus = this.character.abilityProficiencies.find(prof => prof === ability);
+
+    return this.scoreCalculatorService.calcSavingThrow(this.character.abilities[ability] ,this.character.level, bonus) ;
+  }
+
+  checkSkillProficiency(skill) {
+    return this.character.proficiencies.includes(skill);
+  }
+
+  calcSkillCheckBonus(skill) {
+   const mod = this.scoreCalculatorService.renderAbilityMod(this.character.abilities[skill.ability_score.index]);
+   const bonus = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
+
+   return mod + bonus;
+  }
+
+  onChange(event) {
+    this.subject = event.detail.value;
   }
 }
