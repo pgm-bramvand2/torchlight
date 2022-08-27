@@ -1,5 +1,83 @@
 <app-main-menu></app-main-menu>
 
-<ion-content>
- <ion-button>test</ion-button>
+<app-character-bar></app-character-bar>
+
+<ion-content id="main-content">
+  <ion-grid>
+      <ion-row class="overview-header">
+          <app-title
+            title="Actions"
+          ></app-title>
+      </ion-row>
+      
+        <ion-row>
+          <ion-col>
+            <ion-grid class="table-theme">
+              <ion-row class="table-header ion-align-items-center">
+                <ion-col size="4"> Weapon </ion-col>
+                
+                <ion-col size="2"> Range </ion-col>
+                
+                <ion-col size="3"> To hit </ion-col>
+                
+                <ion-col size="3"> Damage </ion-col>
+              </ion-row>
+              
+              <ion-row *ngFor="let weapon of weapons" class="ion-align-items-center">
+              <ion-col size="4">{{ weapon.name }}</ion-col>
+              
+              <ion-col size="2">
+                <app-passive-stat
+                [score]="weapon.range.normal"
+                ></app-passive-stat>
+              </ion-col>
+              
+              <ion-col size="3">
+                <ion-button>
+                {{ calcToHit('dex') }}
+              </ion-button>
+              </ion-col>
+              
+              <ion-col size="3">
+                <ion-button>
+                    {{ weapon.damage.damage_dice }}
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col>
+          <ion-grid class="table-theme info-block">
+            <ion-row class="table-header ion-align-items-center info-block-row" >
+              <ion-col size="12" class="info-block-title"> Senses </ion-col>  
+            </ion-row>
+            
+            <ion-row class="ion-align-items-center info-block-row">
+              <ion-col size="12" class="info-block-text">
+                Attack, cast a  spell, dash, disengage, dodge, help, hide, ready, search, use an object, grapple, shove, improvise.
+            </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col>
+          <ion-grid class="table-theme info-block">
+            <ion-row class="table-header ion-align-items-center info-block-row">
+              <ion-col size="12" class="info-block-title" > Actions in Combat</ion-col>  
+            </ion-row>
+            
+            <ion-row class="ion-align-items-center info-block-row">
+              <ion-col size="12" class="info-block-text">
+                Attack, cast a  spell, dash, disengage, dodge, help, hide, ready, search, use an object, grapple, shove, improvise.
+            </ion-col >
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>

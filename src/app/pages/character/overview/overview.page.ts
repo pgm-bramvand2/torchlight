@@ -54,9 +54,8 @@ export class OverviewPage implements OnInit {
   ];
 
   subject = 'abilities';
-  skills$ = this.apiService.getCharacterSkills().pipe(
-    tap(console.log)
-    );
+  skills$ = this.apiService.getCharacterSkills().pipe();
+  characterProficiencies$ = this.apiService.getCharacterClassProficiencies(this.character.class).pipe();
 
 
 
@@ -67,6 +66,7 @@ export class OverviewPage implements OnInit {
     ) { }
 
     ngOnInit() {
+      console.log(this.characterProficiencies$);
   }
 
   calcMod(score) {
@@ -75,8 +75,8 @@ export class OverviewPage implements OnInit {
 
   calcSavingThrow(ability){
     const bonus = this.character.abilityProficiencies.find(prof => prof === ability);
-
-    return this.scoreCalculatorService.calcSavingThrow(this.character.abilities[ability] ,this.character.level, bonus) ;
+    const savingThrow = this.scoreCalculatorService.calcSavingThrow(this.character.abilities[ability] ,this.character.level, bonus);
+    return this.scoreCalculatorService.addPlusSign(savingThrow);
   }
 
   checkSkillProficiency(skill) {
@@ -84,10 +84,10 @@ export class OverviewPage implements OnInit {
   }
 
   calcSkillCheckBonus(skill) {
-   const mod = this.scoreCalculatorService.renderAbilityMod(this.character.abilities[skill.ability_score.index]);
-   const bonus = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
+    const mod: number = this.scoreCalculatorService.calcAbilityMod(this.character.abilities[skill.ability_score.index]);
+    const bonus: number = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
 
-   return mod + bonus;
+    return this.scoreCalculatorService.addPlusSign(mod + bonus);
   }
 
   onChange(event) {

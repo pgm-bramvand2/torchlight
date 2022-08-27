@@ -127,13 +127,25 @@
               <ion-col size="3">
                 <ion-button
                 >
-                    {{ calcSkillPRoficiency(skill) }}                    
+                    {{ calcSkillCheckBonus(skill) }}                    
                   </ion-button>
                 </ion-col>
               </ion-row>
           </ion-grid>
         </ion-col>
       </ion-row>
+    </div>
+
+    <div *ngIf="subject === 'proficiencies'">
+      <ion-list *ngIf="(characterProficiencies$ | async) as proficiencies">
+        <ion-item
+          *ngFor="let proficiency of proficiencies"
+        >
+        <ion-label>
+          {{ proficiency.name }}
+        </ion-label>
+      </ion-item>
+      </ion-list>
     </div>
     </ion-grid>
 </ion-content>
