@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +25,16 @@ export class FirestoreService {
   getUserCharacters(userId) {
     return this.firestore
     .collection('characters', ref => ref.where('userId', '==', userId))
-    .valueChanges();
+    .valueChanges({idField: 'id'});
   }
 
   updateCharacter(id, data) {
-    const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`characters/${id}` );
+    return this.firestore
+    .collection('characters')
+    .doc(id)
+    .update(data);
 
-    return userRef.update(data);
   }
+
+
 }

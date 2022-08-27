@@ -17,9 +17,9 @@
             <ion-col size="4">
               <ion-button>
                 <ul>
-                  <li>35</li>
+                  <li>{{ character.currentHp }}</li>
                   <li class="separator"></li>
-                  <li>35</li>
+                  <li>{{ character.totalHp }}</li>
                   <li>HP</li>
                 </ul>
               </ion-button>
@@ -34,28 +34,28 @@
             <ion-col size="2">
               <app-passive-stat
                 title="initiative"
-                score="+3"
+                [score]="initiative"
               ></app-passive-stat>
             </ion-col>
 
             <ion-col size="2">
               <app-passive-stat
                 title="speed"
-                score="30"
+                [score]="character.speed"
               ></app-passive-stat>
             </ion-col>
 
-            <ion-col size="2">
+            <!-- <ion-col size="2">
               <app-passive-stat
                 title="ac"
-                score="18"
+                [score]="armorClass"
               ></app-passive-stat>
-            </ion-col>
+            </ion-col> -->
 
             <ion-col size="2">
               <app-passive-stat
                 title="prof"
-                score="+3"
+                [score]="proficiencyBonus"
               ></app-passive-stat>
             </ion-col>
 
