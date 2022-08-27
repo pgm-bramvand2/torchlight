@@ -29,8 +29,4 @@ export class LoginPage implements OnInit {
       await this.authService.signIn(email, password);
     }
   }
-
-  test() {
-    console.log('clickerdeclick');
-  }
 }

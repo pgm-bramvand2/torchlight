@@ -12,7 +12,6 @@ import { LocalstorageService } from 'src/app/shared/services/localstorage/locals
 export class CharactersPage implements OnInit {
   user = this.localStorageService.getStorageItem('user');
   characters$ =  this.fireStoreService.getUserCharacters(this.user.uid).pipe(
-    tap(console.log),
     tap((characters) => {
       this.localStorageService.setStorageItem('characters', characters);
     }));

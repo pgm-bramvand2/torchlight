@@ -65,9 +65,7 @@ export class OverviewPage implements OnInit {
     private apiService: ApiService
     ) { }
 
-    ngOnInit() {
-      console.log(this.characterProficiencies$);
-  }
+    ngOnInit() {}
 
   calcMod(score) {
     return this.scoreCalculatorService.renderAbilityMod(score) ;

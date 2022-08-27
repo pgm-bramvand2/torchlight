@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>spells</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-main-menu></app-main-menu>
 
-<ion-content>
+<app-character-bar></app-character-bar>
 
+<ion-content id="main-content">
+  <ion-grid>
+      <ion-row class="overview-header">
+          <app-title
+            title="Spells"
+          ></app-title>
+      </ion-row>
+      
+        <ion-row>
+          <ion-label *ngIf="(spells$ | async)?.count === 0"> 
+            Character has no spells.
+          </ion-label>
+              <ion-list *ngIf="(spells$ | async)?.results as spells">
+                <ion-item
+                  button
+                  *ngFor="let spell of spells"
+                  (click)="onClickSpell(spell.index)"
+                  >
+                  {{ spell.name }}
+                </ion-item>
+              </ion-list>
+      </ion-row>
+    </ion-grid>
 </ion-content>

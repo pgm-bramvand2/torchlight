@@ -24,9 +24,7 @@ export class ActionsPage implements OnInit {
 
   calcToHit(ability){
     const abilityMod = this.scoreCalculatorService.calcAbilityMod(this.character.abilities[ability]);
-    console.log(this.character.level);
     const proficiencyMod = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
-    console.log(proficiencyMod);
 
     return this.scoreCalculatorService.addPlusSign(abilityMod + proficiencyMod);
   }

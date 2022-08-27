@@ -43,4 +43,12 @@ export class ApiService {
     //   map( result = > {})
     // ).subscribe();
   }
+
+  getCharacterSpells(characterClass: CharacterClass, level: number) {
+    return this.http.get(`${this.baseUrl}/api/classes/${characterClass}/levels/${level}/spells`);
+  }
+
+  getCharacterSpell(spellIndex: string) {
+    return this.http.get(`${this.baseUrl}/api/spells/${spellIndex}`);
+  }
 }

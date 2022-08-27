@@ -18,13 +18,7 @@ export class HomePage {
     await this.menuCtrl.open();
   }
 
-  onChange(event) {
-    console.log(event);
-
-  }
-
   navigate(route: string) {
-    console.log(route);
     this.router.navigate(['/', route]);
   }
 }

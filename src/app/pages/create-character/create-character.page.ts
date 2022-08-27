@@ -238,8 +238,5 @@ export class CreateCharacterPage implements OnInit {
       this.firestoreService.createCharacter(this.characterForm.value);
       this.router.navigate(['characters']);
     }
-
-
-    console.log(this.characterForm.value);
   }
 }
