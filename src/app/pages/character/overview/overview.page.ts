@@ -77,9 +77,11 @@ export class OverviewPage implements OnInit {
   calcSkillCheckBonus(skill) {
     // Calculate the ability proficiency modifier
     const mod: number = this.scoreCalculatorService.calcAbilityMod(this.character.abilities[skill.ability_score.index]);
+    // Calculate the proficiency modifier
+    const bonus: number = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
 
     // Return the bonus with prefix
-    return this.scoreCalculatorService.addPlusSign(mod + this.character.proficiencyBonus);
+    return this.scoreCalculatorService.addPlusSign(mod + bonus);
   }
 
   // Handle the dice roll on click event by showing an alert with the diceroll result
