@@ -17,11 +17,9 @@ export class ActionsPage implements OnInit {
     private localStorageService: LocalstorageService,
     private scoreCalculatorService: ScoreCalculatorService,
     private diceRollerService: DiceRollerService,
-    private apiService: ApiService
   ) { }
 
   ngOnInit() {
-    this.apiService.getCharacterStartingEquipment();
   }
 
   calcToHit(ability){

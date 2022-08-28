@@ -34,7 +34,14 @@
       <div *ngIf="subject === 'abilities'">
         <ion-row>
           <ion-col>
-            <ion-grid class="table-theme">
+            <ion-spinner 
+              color="primary" 
+              name="circles" 
+              *ngIf="characterAbilitiesLoading$ | async"
+            ></ion-spinner>
+            
+            <ion-grid class="table-theme" *ngIf="(abilities$ | async) as abilities">
+
               <ion-row class="table-header ion-align-items-center">
                 <ion-col size="4"> Attribute </ion-col>
                 
@@ -46,7 +53,7 @@
               </ion-row>
               
               <ion-row *ngFor="let ability of abilities" class="ion-align-items-center">
-              <ion-col size="4">{{ ability?.name }}</ion-col>
+              <ion-col size="4">{{ ability?.full_name }}</ion-col>
               
               <ion-col size="3">
                 <app-passive-stat
@@ -101,7 +108,14 @@
     <div *ngIf="subject === 'skills'">
         <ion-row>
           <ion-col>
+            <ion-spinner 
+              color="primary" 
+              name="circles" 
+              *ngIf="characterSkillsLoading$ | async"
+            ></ion-spinner>
+            
             <ion-grid class="table-theme"  *ngIf="(skills$ | async) as skills">
+
               <ion-row class="table-header ion-align-items-center">
                 <ion-col size="4"> Skill </ion-col>
                 
@@ -142,7 +156,11 @@
     </div>
 
     <div *ngIf="subject === 'proficiencies'">
-      <p *ngIf="characterProficienciesLoading$ | async">Loading</p>
+      <ion-spinner 
+        color="primary" 
+        name="circles" 
+        *ngIf="characterProficienciesLoading$ | async"
+      ></ion-spinner>
       <ion-list *ngIf="(characterProficiencies$ | async) as proficiencies">
         <ion-item
           *ngFor="let proficiency of proficiencies"

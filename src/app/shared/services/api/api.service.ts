@@ -9,6 +9,8 @@ import { CharacterClass, CharacterRace } from '../../interfaces';
 export class ApiService {
   baseUrl = 'https://www.dnd5eapi.co';
 
+  loadingAbilities= new BehaviorSubject(false);
+  loadingSkills= new BehaviorSubject(false);
   loadingProficiencies= new BehaviorSubject(false);
   constructor(private http: HttpClient) { }
 
@@ -21,8 +23,11 @@ export class ApiService {
   };
 
   getCharacterSkills() {
+    this.loadingSkills.next(true);
+
     return this.http.get(`${this.baseUrl}/api/skills`).pipe(
-      switchMap(({ results }: { results: any[] }) => combineLatest(results.map(({ url }) => this.http.get(`${this.baseUrl}${url}`))))
+      switchMap(({ results }: { results: any[] }) => combineLatest(results.map(({ url }) => this.http.get(`${this.baseUrl}${url}`)))),
+      finalize(() => { this.loadingSkills.next(false); })
     );
   }
 
@@ -31,21 +36,17 @@ export class ApiService {
 
     return this.http.get(`${this.baseUrl}/api/classes/${characterClass}/proficiencies`).pipe(
       switchMap(({ results }: { results: any[] }) => combineLatest(results.map(({ url }) => this.http.get(`${this.baseUrl}${url}`)))),
-      finalize(() => {this.loadingProficiencies.next(false);})
+      finalize(() => { this.loadingProficiencies.next(false); })
     );
   }
 
-  getCharacterStartingEquipment() {
-    const characterClass: unknown = 'fighter';
-    this.getCharacterClass(characterClass as CharacterClass).pipe(
-      map(( result: any ) => {
-        console.log(result.starting_equipment_options);
-      })
-    ).subscribe();
+  getCharacterAbilities() {
+    this.loadingAbilities.next(true);
 
-    // this.getCharacterClass(characterClass as CharacterClass).pipe(
-    //   map( result = > {})
-    // ).subscribe();
+    return this.http.get(`${this.baseUrl}/api/ability-scores`).pipe(
+      switchMap(({results}: {results: any[]}) => combineLatest(results.map(({ url }) => this.http.get(`${this.baseUrl}${url}`)))),
+      finalize(() => { this.loadingAbilities.next(false); })
+    );
   }
 
   getCharacterSpells(characterClass: CharacterClass, level: number) {

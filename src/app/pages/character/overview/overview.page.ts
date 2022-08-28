@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/shared/services/api/api.service';
 import { DiceRollerService } from 'src/app/shared/services/dice-roller/dice-roller.service';
 import { LocalstorageService } from 'src/app/shared/services/localstorage/localstorage.service';
 import { ScoreCalculatorService } from 'src/app/shared/services/score-calculator/score-calculator.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-overview',
@@ -11,33 +12,6 @@ import { ScoreCalculatorService } from 'src/app/shared/services/score-calculator
   styleUrls: ['./overview.page.scss'],
 })
 export class OverviewPage implements OnInit {
-  abilities = [
-    {
-      index: 'str',
-      name: 'Strength'
-    },
-    {
-      index: 'dex',
-      name: 'Dexterity'
-    },
-    {
-      index: 'con',
-      name: 'Constitution'
-    },
-    {
-      index: 'int',
-      name: 'Intelligence'
-    },
-    {
-      index: 'wis',
-      name: 'Wisdom'
-    },
-    {
-      index: 'cha',
-      name: 'Charisma'
-    },
-  ];
-
   character = this.localStorageService.getStorageItem('character');
   senses = [
     {
@@ -55,7 +29,10 @@ export class OverviewPage implements OnInit {
   ];
 
   subject = 'abilities';
+  abilities$ = this.apiService.getCharacterAbilities().pipe();
+  characterAbilitiesLoading$ = this.apiService.loadingAbilities;
   skills$ = this.apiService.getCharacterSkills().pipe();
+  characterSkillsLoading$ = this.apiService.loadingSkills;
   characterProficiencies$ = this.apiService.getCharacterClassProficiencies(this.character.class).pipe();
   characterProficienciesLoading$ = this.apiService.loadingProficiencies;
 
@@ -66,9 +43,9 @@ export class OverviewPage implements OnInit {
     private scoreCalculatorService: ScoreCalculatorService,
     private apiService: ApiService,
     private diceRollerService: DiceRollerService,
-    ) { }
+  ) { }
 
-    ngOnInit() {}
+  ngOnInit() {}
 
   calcMod(score) {
     return this.scoreCalculatorService.renderAbilityMod(score) ;
