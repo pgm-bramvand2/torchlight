@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { combineLatest } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { finalize, map, switchMap } from 'rxjs/operators';
 import { CharacterClass, CharacterRace } from '../../interfaces';
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ import { CharacterClass, CharacterRace } from '../../interfaces';
 export class ApiService {
   baseUrl = 'https://www.dnd5eapi.co';
 
+  loadingProficiencies= new BehaviorSubject(false);
   constructor(private http: HttpClient) { }
 
   getCharacterRace(characterRace: CharacterRace) {
@@ -26,8 +27,11 @@ export class ApiService {
   }
 
   getCharacterClassProficiencies(characterClass: CharacterClass) {
+    this.loadingProficiencies.next(true);
+
     return this.http.get(`${this.baseUrl}/api/classes/${characterClass}/proficiencies`).pipe(
-      switchMap(({ results }: { results: any[] }) => combineLatest(results.map(({ url }) => this.http.get(`${this.baseUrl}${url}`))))
+      switchMap(({ results }: { results: any[] }) => combineLatest(results.map(({ url }) => this.http.get(`${this.baseUrl}${url}`)))),
+      finalize(() => {this.loadingProficiencies.next(false);})
     );
   }
 

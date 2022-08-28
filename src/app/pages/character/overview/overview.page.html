@@ -142,6 +142,7 @@
     </div>
 
     <div *ngIf="subject === 'proficiencies'">
+      <p *ngIf="characterProficienciesLoading$ | async">Loading</p>
       <ion-list *ngIf="(characterProficiencies$ | async) as proficiencies">
         <ion-item
           *ngFor="let proficiency of proficiencies"

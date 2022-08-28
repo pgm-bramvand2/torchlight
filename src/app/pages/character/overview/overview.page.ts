@@ -57,6 +57,7 @@ export class OverviewPage implements OnInit {
   subject = 'abilities';
   skills$ = this.apiService.getCharacterSkills().pipe();
   characterProficiencies$ = this.apiService.getCharacterClassProficiencies(this.character.class).pipe();
+  characterProficienciesLoading$ = this.apiService.loadingProficiencies;
 
 
 

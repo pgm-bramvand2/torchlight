@@ -23,7 +23,6 @@ export class CharactersPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
   }
 
   onClickCreate() {

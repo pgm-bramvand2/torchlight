@@ -2,6 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { LocalstorageService } from '../localstorage/localstorage.service';
 import { User } from './interfaces';
 
@@ -17,7 +18,8 @@ export class AuthService {
     public firestore: AngularFirestore,
     public fireAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    public navController: NavController
     ) {
       this.fireAuth.authState.subscribe((user) => {
         if(user) {
@@ -73,8 +75,7 @@ export class AuthService {
   async signOut() {
     return this.fireAuth.signOut().then(() => {
       this.localStorageService.clearStorage();
-      console.log(this.localStorageService.getStorageItem('user'));
-      this.router.navigate(['home']);
+      this.navController.navigateRoot('/home');
     });
   }
 

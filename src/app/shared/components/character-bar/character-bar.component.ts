@@ -44,9 +44,10 @@ export class CharacterBarComponent implements OnInit {
     if(!this.character.currentHp) {
       hp = this.character.totalHp;
       console.log('current if-> ', hp);
+    } else {
+      hp = this.character.currentHp;
     }
 
-    hp = this.character.currentHp;
 
     if(newHp) {
       console.log('newhp if-> ', hp);
