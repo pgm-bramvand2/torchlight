@@ -15,7 +15,9 @@
             </ion-col>
 
             <ion-col size="4">
-              <ion-button>
+              <ion-button
+                (click)="onClickHp()"
+              >
                 <ul>
                   <li>{{ character.currentHp }}</li>
                   <li class="separator"></li>
@@ -45,12 +47,12 @@
               ></app-passive-stat>
             </ion-col>
 
-            <!-- <ion-col size="2">
+            <ion-col size="2">
               <app-passive-stat
                 title="ac"
-                [score]="armorClass"
+                score="18"
               ></app-passive-stat>
-            </ion-col> -->
+            </ion-col>
 
             <ion-col size="2">
               <app-passive-stat
@@ -60,7 +62,10 @@
             </ion-col>
 
             <ion-col size="2">
-              <app-inspiration-button></app-inspiration-button>
+              <app-inspiration-button
+              >
+                {{ character.inspiration? character.inspiration : false }}
+              </app-inspiration-button>
             </ion-col>
           </ion-row>
         </ion-grid>
