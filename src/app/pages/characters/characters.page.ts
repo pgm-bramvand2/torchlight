@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { tap } from 'rxjs/operators';
 import { FirestoreService } from 'src/app/shared/services/firebase/firestore/firestore.service';
 import { LocalstorageService } from 'src/app/shared/services/localstorage/localstorage.service';
@@ -17,7 +18,7 @@ export class CharactersPage implements OnInit {
     }));
 
   constructor(
-    private router: Router,
+    private navController: NavController,
     private fireStoreService: FirestoreService,
     private localStorageService: LocalstorageService
   ) { }
@@ -26,11 +27,11 @@ export class CharactersPage implements OnInit {
   }
 
   onClickCreate() {
-    this.router.navigate(['create-character']);
+    this.navController.navigateForward('create-character');
   }
 
   onClickCharacter(character) {
     this.localStorageService.setStorageItem('character', character);
-    this.router.navigate(['character']);
+    this.navController.navigateForward('character');
   }
 }

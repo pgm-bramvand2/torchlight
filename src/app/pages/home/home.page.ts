@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,15 +10,15 @@ import { MenuController } from '@ionic/angular';
 export class HomePage {
 
   constructor(
-    private menuCtrl: MenuController,
-    private router: Router
+    private menuController: MenuController,
+    private navController: NavController
     ) {}
 
   async openMenu() {
-    await this.menuCtrl.open();
+    await this.menuController.open();
   }
 
   navigate(route: string) {
-    this.router.navigate(['/', route]);
+    this.navController.navigateForward(route);
   }
 }

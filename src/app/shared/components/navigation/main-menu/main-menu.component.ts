@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-main-menu',
@@ -11,7 +11,7 @@ export class MainMenuComponent implements OnInit {
 
   constructor(
     private menuCtrl: MenuController,
-    private router: Router
+    private navController: NavController
     ) { }
 
   ngOnInit() {}
@@ -21,7 +21,7 @@ export class MainMenuComponent implements OnInit {
   }
 
   navigate(path){
-    this.router.navigate(['/', path]);
+    this.navController.navigateForward(path);
   }
 
 }

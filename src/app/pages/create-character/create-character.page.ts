@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { pairwise, startWith, tap, switchMap } from 'rxjs/operators';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 import { FirebaseStorageService } from 'src/app/shared/services/firebase/firebase-storage/firebase-storage.service';
@@ -78,7 +78,7 @@ export class CreateCharacterPage implements OnInit {
     private localStorageService: LocalstorageService,
     private firestoreService: FirestoreService,
     private alertController: AlertController,
-    private router: Router
+    private navController: NavController
     ) { }
 
   ngOnInit() {
@@ -204,7 +204,7 @@ export class CreateCharacterPage implements OnInit {
   }
 
   navigateBack() {
-   this.router.navigate(['characters']);
+   this.navController.navigateForward('characters');
   }
 
   async presentAlertConfirm() {
@@ -236,7 +236,7 @@ export class CreateCharacterPage implements OnInit {
     if(this.confirmed === 'confirm') {
       this.addBonusesToAbilityScores();
       this.firestoreService.createCharacter(this.characterForm.value);
-      this.router.navigate(['characters']);
+      this.navController.navigateForward('characters');
     }
   }
 }

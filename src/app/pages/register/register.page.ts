@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 @Component({
   selector: 'app-register',
@@ -15,7 +16,9 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private navController: NavController
+    ) { }
 
   passwordMatchValidator(g: FormGroup) {
     return g.get('password').value === g.get('repeatPassword').value
@@ -23,6 +26,10 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  navigateBack() {
+    this.navController.navigateBack('home');
   }
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
@@ -15,10 +16,15 @@ export class LoginPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private navController: NavController
   ) { }
 
   ngOnInit() {
+  }
+
+  navigateBack() {
+    this.navController.navigateBack('home');
   }
 
   async onSubmit() {

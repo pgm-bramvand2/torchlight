@@ -17,7 +17,6 @@ export class AuthService {
     private localStorageService: LocalstorageService,
     public firestore: AngularFirestore,
     public fireAuth: AngularFireAuth,
-    public router: Router,
     public ngZone: NgZone,
     public navController: NavController
     ) {
@@ -29,7 +28,6 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(this.userData));
           JSON.parse(localStorage.getItem('user'));
       } else {
-        // this.localStorageService.setStorageItem('user','null');
         this.localStorageService.getStorageItem('user');
       }
     });
@@ -48,7 +46,7 @@ export class AuthService {
       this.setUserData(res.user);
       this.fireAuth.authState.subscribe((user) => {
         if(user) {
-          this.router.navigate(['characters']);
+          this.navController.navigateForward('characters');
         }
       });
     })
@@ -63,7 +61,7 @@ export class AuthService {
       this.setUserData(res.user);
       this.fireAuth.authState.subscribe((user) => {
         if(user) {
-          this.router.navigate(['characters']);
+          this.navController.navigateForward('characters');
         }
       });
     })
