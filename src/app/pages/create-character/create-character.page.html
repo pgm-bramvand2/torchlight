@@ -86,7 +86,7 @@
         <ion-select-option 
           *ngFor="let choice of profChoices" 
           [value]="choice.item.index.replace('skill-', '')"
-          [disabled]="checkChoicesAmount(choice.item.index)"
+          [disabled]="checkChoicesAmount(choice.item.index.replace('skill-', ''))"
         >
           {{ choice.item.name.replace('Skill: ', '') }}
         </ion-select-option>

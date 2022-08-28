@@ -162,7 +162,6 @@ export class CreateCharacterPage implements OnInit {
   checkChoicesAmount(item: string) {
     // Get the character form proficiencies value
     const formControlValue = this.characterForm.get('proficiencies').value;
-
     // Check if the proficiencies array length is greater or equal to the current proficiencies amount and if the item isn't already chosen
     // Return a boolean to disable the option
     if(formControlValue.length >= this.profAmount && !formControlValue.includes(item)) {
