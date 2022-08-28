@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/shared/services/api/api.service';
+import { DiceRollerService } from 'src/app/shared/services/dice-roller/dice-roller.service';
 import { LocalstorageService } from 'src/app/shared/services/localstorage/localstorage.service';
 import { ScoreCalculatorService } from 'src/app/shared/services/score-calculator/score-calculator.service';
 
@@ -62,7 +63,8 @@ export class OverviewPage implements OnInit {
   constructor(
     private localStorageService: LocalstorageService,
     private scoreCalculatorService: ScoreCalculatorService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private diceRollerService: DiceRollerService,
     ) { }
 
     ngOnInit() {}
@@ -86,6 +88,10 @@ export class OverviewPage implements OnInit {
     const bonus: number = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
 
     return this.scoreCalculatorService.addPlusSign(mod + bonus);
+  }
+
+  onClickDiceRoll(bonus){
+    this.diceRollerService.showDiceRollAlert(bonus);
   }
 
   onChange(event) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/shared/services/api/api.service';
+import { DiceRollerService } from 'src/app/shared/services/dice-roller/dice-roller.service';
 import { LocalstorageService } from 'src/app/shared/services/localstorage/localstorage.service';
 import { ScoreCalculatorService } from 'src/app/shared/services/score-calculator/score-calculator.service';
 import weapons from './mock/weapons.json';
@@ -15,6 +16,7 @@ export class ActionsPage implements OnInit {
   constructor(
     private localStorageService: LocalstorageService,
     private scoreCalculatorService: ScoreCalculatorService,
+    private diceRollerService: DiceRollerService,
     private apiService: ApiService
   ) { }
 
@@ -27,5 +29,13 @@ export class ActionsPage implements OnInit {
     const proficiencyMod = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
 
     return this.scoreCalculatorService.addPlusSign(abilityMod + proficiencyMod);
+  }
+
+  onRollToHitClick(bonus) {
+    this.diceRollerService.showDiceRollAlert(bonus);
+  }
+
+  onRollDamageClick(bonus) {
+    this.diceRollerService.showDiceRollAlert(bonus);
   }
 }

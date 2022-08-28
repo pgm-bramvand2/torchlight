@@ -36,7 +36,7 @@ export class ScoreCalculatorService {
 
   addPlusSign(score) {
     if(score >= 0) {
-      return `+ ${score}`;
+      return `+${score}`;
     }
 
     return score.toString();

@@ -61,7 +61,9 @@
               </ion-col>
               
               <ion-col size="3">
-                <ion-button>
+                <ion-button
+                  (click)="onClickDiceRoll($event)"
+                >
                     {{ calcSavingThrow(ability.index) }}
                   </ion-button>
                 </ion-col>
@@ -84,9 +86,11 @@
               <ion-col size="10">{{ sense?.name }}</ion-col>
               
               <ion-col size="2">
-                <app-passive-stat
-                [score]="sense.score"
-                ></app-passive-stat>
+                <ion-button
+                (click)="onClickDiceRoll($event)"
+              >
+                {{ sense.score }}
+              </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -126,6 +130,7 @@
               
               <ion-col size="3">
                 <ion-button
+                  (click)="onClickDiceRoll($event)"
                 >
                     {{ calcSkillCheckBonus(skill) }}                    
                   </ion-button>

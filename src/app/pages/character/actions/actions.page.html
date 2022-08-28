@@ -33,13 +33,17 @@
               </ion-col>
               
               <ion-col size="3">
-                <ion-button>
+                <ion-button
+                    (click)="onRollToHitClick($event)"
+                >
                 {{ calcToHit('dex') }}
               </ion-button>
               </ion-col>
               
               <ion-col size="3">
-                <ion-button>
+                <ion-button
+                    (click)="onRollDamageClick($event)"
+                >
                     {{ weapon.damage.damage_dice }}
                   </ion-button>
                 </ion-col>
