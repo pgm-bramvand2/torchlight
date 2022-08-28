@@ -19,8 +19,6 @@ export class FirebaseStorageService {
 
     const filePath = `${collection}/${nanoid()}.${fileSuffix[1]}`;
 
-    this.fireStorage.upload(filePath, data).snapshotChanges().pipe(
-      tap(console.log)
-    );
+    this.fireStorage.upload(filePath, data).snapshotChanges().pipe();
   }
 }

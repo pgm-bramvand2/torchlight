@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate {
     if(this.authService.isLoggedIn !== true) {
       this.navController.navigateBack('home');
     }
-    console.log('user is logged in');
 
     return true;
   }

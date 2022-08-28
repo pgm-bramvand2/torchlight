@@ -11,9 +11,12 @@ import { LocalstorageService } from 'src/app/shared/services/localstorage/locals
   styleUrls: ['./characters.page.scss'],
 })
 export class CharactersPage implements OnInit {
+  // Get the user from local storage
   user = this.localStorageService.getStorageItem('user');
+  // Get the characters belonging to the current user id from the database
   characters$ =  this.fireStoreService.getUserCharacters(this.user.uid).pipe(
     tap((characters) => {
+      // Store the user characters in local storage
       this.localStorageService.setStorageItem('characters', characters);
     }));
 
@@ -26,12 +29,17 @@ export class CharactersPage implements OnInit {
   ngOnInit() {
   }
 
+  // Handle create button on click event
   onClickCreate() {
+    // Navigate to the create character screen
     this.navController.navigateForward('create-character');
   }
 
+  // Handle the character item on click event
   onClickCharacter(character) {
+    // Store selected character in local storage
     this.localStorageService.setStorageItem('character', character);
+    // Navigate to the character screen
     this.navController.navigateForward('character');
   }
 }

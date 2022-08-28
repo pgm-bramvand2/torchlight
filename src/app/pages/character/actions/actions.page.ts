@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/shared/services/api/api.service';
 import { DiceRollerService } from 'src/app/shared/services/dice-roller/dice-roller.service';
 import { LocalstorageService } from 'src/app/shared/services/localstorage/localstorage.service';
 import { ScoreCalculatorService } from 'src/app/shared/services/score-calculator/score-calculator.service';
@@ -11,6 +10,7 @@ import weapons from './mock/weapons.json';
 })
 export class ActionsPage implements OnInit {
   weapons= weapons;
+  // Get character object from local storage
   character = this.localStorageService.getStorageItem('character');
 
   constructor(
@@ -22,18 +22,21 @@ export class ActionsPage implements OnInit {
   ngOnInit() {
   }
 
+  // Calculate to hit roll and return the result with the appropriate prefix
   calcToHit(ability){
+    // Calculate the ability modifier
     const abilityMod = this.scoreCalculatorService.calcAbilityMod(this.character.abilities[ability]);
-    const proficiencyMod = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
 
-    return this.scoreCalculatorService.addPlusSign(abilityMod + proficiencyMod);
+    return this.scoreCalculatorService.addPlusSign(abilityMod + this.character.proficiencyBonus);
   }
 
+  // Calculate the on hit roll
   onRollToHitClick(bonus) {
     this.diceRollerService.showDiceRollAlert(bonus);
   }
 
+  // Calculate the damage roll
   onRollDamageClick(bonus) {
-    this.diceRollerService.showDiceRollAlert(bonus);
+    this.diceRollerService.showDamageRollAlert(bonus, this.character.proficiencyBonus);
   }
 }

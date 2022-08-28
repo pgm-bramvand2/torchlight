@@ -14,8 +14,8 @@ export class DiceRollerService {
     return min + Math.floor(Math.random()* (max - min + 1));
   }
 
-  diceRoll( type: number, bonus: number = 0, amount: number= 1) {
-    const roll = this.dieRoll(type);
+  diceRoll( die: number, bonus: number = 0, amount: number= 1) {
+    const roll = this.dieRoll(die);
     const total = roll + bonus;
 
     return {total, roll};
@@ -53,6 +53,23 @@ export class DiceRollerService {
     bonus = Number(bonus);
     const die= 20;
     const roll = this.diceRoll(die, bonus);
+
+    this.diceRollAlert(bonus, die, roll , amount);
+  }
+
+  showDamageRollAlert(dice, bonus) {
+    dice = dice.srcElement.innerText;
+    let amount: number;
+    let die: number;
+
+    if(dice.includes('D')) {
+      const splitString = dice.split('D');
+      die = splitString[1];
+      amount = Number(splitString[0]);
+    }
+
+    die = Number(die);
+    const roll = this.diceRoll(die, bonus, amount );
 
     this.diceRollAlert(bonus, die, roll , amount);
   }

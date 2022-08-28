@@ -10,12 +10,12 @@ import { ScoreCalculatorService } from '../../services/score-calculator/score-ca
   styleUrls: ['./character-bar.component.scss'],
 })
 export class CharacterBarComponent implements OnInit {
-  public character;
-  public avatarUrl: string;
-  public currentHp: number;
-  public initiative: number;
-  public armorClass: number;
-  public proficiencyBonus: number;
+  character;
+  avatarUrl: string;
+  currentHp: number;
+  initiative: number;
+  armorClass: number;
+  proficiencyBonus: number;
 
   constructor(
     private localStorageService: LocalstorageService,
@@ -25,36 +25,40 @@ export class CharacterBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Get the currect character form local storage
     this.character = this.localStorageService.getStorageItem('character');
+    // Set the current character's the currenct hp
     this.setCurrentHp();
+    // Set the current character
     this.setCharacter();
-    console.log(this.character);
   }
 
+  // Update the character in local storage and on the database
   updateCharacter(character) {
     this.localStorageService.setStorageItem('character', character);
     this.character = character;
   }
 
-
+  // Set the character's current hitpoints
   setCurrentHp(newHp: number = null) {
     let hp: number;
-    console.log(this.character.currentHp);
 
+    // Check if the character object has current hp
     if(!this.character.currentHp) {
+      // If not set the current hp to the maximum hp
       hp = this.character.totalHp;
-      console.log('current if-> ', hp);
     } else {
+      // If so keep the current hp
       hp = this.character.currentHp;
     }
 
-
+    // Check if the newHp param exists
     if(newHp) {
-      console.log('newhp if-> ', hp);
+      // If so set the hp to the new hp value
       hp = newHp;
     }
-    console.log('after if-> ', hp);
 
+    // Update the character with the hp in local storage and on the database
     this.firestoreService.updateCharacter(this.character.id, {currentHp: hp});
     this.updateCharacter({
       ...this.character,
@@ -62,34 +66,42 @@ export class CharacterBarComponent implements OnInit {
     });
   }
 
-
+  // Set the character
   setCharacter() {
+    // Check if the current character object has initiative
     if(!this.character.initiative) {
+      // If not calculate the initiative
       const initiativeScore = this.scoreCalculatorService.calcAbilityMod(this.character.abilities.dex);
 
+      // Update the character with new initative in local store and on th database
       this.firestoreService.updateCharacter(this.character.id, {initiative: initiativeScore});
-
       this.updateCharacter({
         ...this.character,
         initiative: initiativeScore
       });
     }
 
+    // Add a visual plus sign to the initiative score
     this.initiative = this.scoreCalculatorService.addPlusSign(this.character.initiative);
 
+    // Check if the current character object has a proficiency bonus
     if(!this.character.proficiencyBonus) {
-      const proficiencyBonusScore = this.scoreCalculatorService.calcAbilityMod(this.character.abilities.dex);
-      this.firestoreService.updateCharacter(this.character.id, {initiative: proficiencyBonusScore});
+      // If not calculate the proficiency bonus
+      const proficiencyBonusScore = this.scoreCalculatorService.calcProficiencyMod(this.character.level);
 
+      // Update character with new proficiency bonus in local storage and in database
+      this.firestoreService.updateCharacter(this.character.id, {proficiencyBonus: proficiencyBonusScore});
       this.updateCharacter({
         ...this.character,
         proficiencyBonus: proficiencyBonusScore
       });
     }
 
+    // Add a visual plus sign to the initiative score
     this.proficiencyBonus= this.scoreCalculatorService.addPlusSign(this.character.proficiencyBonus);
   }
 
+  // Create a hitpoints alert with a small form to adjust the current hp and set the currenthp
   async hpAlert() {
     const alert = await this.alertController.create({
       header: 'Set your current Hitpoints',
@@ -98,9 +110,6 @@ export class CharacterBarComponent implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: () => {
-              console.log('Confirm Cancel');
-          }
       },
       {
           text: 'Ok',
@@ -124,6 +133,7 @@ export class CharacterBarComponent implements OnInit {
     await alert.present();
   }
 
+  // Handle the hp on click event
   async onClickHp() {
    this.hpAlert();
   }

@@ -10,8 +10,11 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./spells.page.scss'],
 })
 export class SpellsPage implements OnInit {
+  // Get the character from the local storage
   character = this.localstorageService.getStorageItem('character');
+  // Get the spells list from the api
   spells$ = this.apiService.getCharacterSpells(this.character.class, this.character.level).pipe();
+  // Keep track of the currently selected spell
   currentSpell;
 
   constructor(
@@ -23,7 +26,8 @@ export class SpellsPage implements OnInit {
   ngOnInit() {
   }
 
-  async presentAlertConfirm(spell) {
+  // Create an alert with the currently selected spell info
+  async showSpellInfoAlert(spell) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: spell.name,
@@ -34,9 +38,11 @@ export class SpellsPage implements OnInit {
     await alert.present();
   }
 
+  // Handle the spell item on click event
   onClickSpell(spellIndex: string) {
+  // Get the specific spell from the api and transfer the data to the alert function
   this.apiService.getCharacterSpell(spellIndex).pipe(
-    ).subscribe(data => this.presentAlertConfirm(data));
+    ).subscribe(data => this.showSpellInfoAlert(data));
   }
 
 }
